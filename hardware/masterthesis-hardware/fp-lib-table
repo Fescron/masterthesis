@@ -1,0 +1,9 @@
+(fp_lib_table
+  (lib (name BrechtVE_Aesthetics)(type KiCad)(uri ${KIPRJMOD}/Footprints/BrechtVE_Aesthetics.pretty)(options "")(descr ""))
+  (lib (name Connector_Phoenix_PTSA_extra)(type KiCad)(uri ${KIPRJMOD}/Footprints/Connector_Phoenix_PTSA_extra.pretty)(options "")(descr ""))
+  (lib (name SparkfunConnectors)(type KiCad)(uri ${KIPRJMOD}/Footprints/SparkfunConnectors.pretty)(options "")(descr ""))
+  (lib (name Converter_ACDC_extra)(type KiCad)(uri ${KIPRJMOD}/Footprints/Converter_ACDC_extra.pretty)(options "")(descr ""))
+  (lib (name Package_LGA_extra)(type KiCad)(uri ${KIPRJMOD}/Footprints/Package_LGA_extra.pretty)(options "")(descr ""))
+  (lib (name Connector_Card_extra)(type KiCad)(uri ${KIPRJMOD}/Footprints/Connector_Card_extra.pretty)(options "")(descr ""))
+  (lib (name Display_extra)(type KiCad)(uri ${KIPRJMOD}/Footprints/Display_extra.pretty)(options "")(descr ""))
+)

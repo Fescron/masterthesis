@@ -1,0 +1,1681 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 5
+Title "IoT MBBR (Master Thesis Hardware)"
+Date "2020-03-17"
+Rev "v1.0"
+Comp "Brecht Van Eeckhoudt - KULeuven"
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 5E4BDDEC
+P 10100 7050
+F 0 "H1" H 10200 7050 50  0000 L CNN
+F 1 "MountingHole" H 10200 7005 50  0001 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 10100 7050 50  0001 C CNN
+F 3 "~" H 10100 7050 50  0001 C CNN
+	1    10100 7050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 5E4BDFB7
+P 10400 7050
+F 0 "H2" H 10500 7050 50  0000 L CNN
+F 1 "MountingHole" H 10500 7005 50  0001 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 10400 7050 50  0001 C CNN
+F 3 "~" H 10400 7050 50  0001 C CNN
+	1    10400 7050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 5E4BE12E
+P 10700 7050
+F 0 "H3" H 10800 7050 50  0000 L CNN
+F 1 "MountingHole" H 10800 7005 50  0001 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 10700 7050 50  0001 C CNN
+F 3 "~" H 10700 7050 50  0001 C CNN
+	1    10700 7050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 5E4BE2D2
+P 11000 7050
+F 0 "H4" H 11100 7050 50  0000 L CNN
+F 1 "MountingHole" H 11100 7005 50  0001 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 11000 7050 50  0001 C CNN
+F 3 "~" H 11000 7050 50  0001 C CNN
+	1    11000 7050
+	1    0    0    -1  
+$EndComp
+$Comp
+L BrechtVE_Aesthetics:Symbol_OSHW-Logo_11.4x12mm G1
+U 1 1 5E4BD295
+P 10950 6400
+F 0 "G1" H 10950 6195 60  0001 C CNN
+F 1 "Symbol_OSHW-Logo_11.4x12mm" H 10950 6605 60  0001 C CNN
+F 2 "BrechtVE_Aesthetics:OSHW-Logo_5.7x6mm_SolderMask" H 10950 6400 50  0001 C CNN
+F 3 "" H 10950 6400 50  0001 C CNN
+	1    10950 6400
+	1    0    0    -1  
+$EndComp
+$Sheet
+S 3700 3250 1300 500 
+U 5E5EC2C1
+F0 "4x LMP38640" 50
+F1 "LMP38640.sch" 50
+F2 "ADC_CH4" O R 5000 3350 50 
+F3 "ADC_CH5" O R 5000 3450 50 
+F4 "ADC_CH6" O R 5000 3550 50 
+F5 "ADC_CH7" O R 5000 3650 50 
+$EndSheet
+$Sheet
+S 7250 3250 1250 800 
+U 5E914D66
+F0 "BG96" 50
+F1 "BG96.sch" 50
+F2 "BG96_TXD" O L 7250 3350 50 
+F3 "BG96_RXD" I L 7250 3450 50 
+F4 "BG96_PWRKEY" I L 7250 3550 50 
+F5 "BG96_STAT" O L 7250 3650 50 
+F6 "BG96_~RESET" I L 7250 3750 50 
+F7 "BG96_DTR" I L 7250 3850 50 
+F8 "BG96_RI" O L 7250 3950 50 
+$EndSheet
+Wire Wire Line
+	5000 3350 5250 3350
+Wire Wire Line
+	5000 3450 5250 3450
+Wire Wire Line
+	5000 3550 5250 3550
+Wire Wire Line
+	5000 3650 5250 3650
+Wire Wire Line
+	7000 3350 7250 3350
+Wire Wire Line
+	7000 3450 7250 3450
+Wire Wire Line
+	7000 3550 7250 3550
+Wire Wire Line
+	7000 3650 7250 3650
+Wire Wire Line
+	7000 3750 7250 3750
+$Comp
+L SparkFun-PowerSymbols:GND #GND017
+U 1 1 5E77861E
+P 10800 5500
+AR Path="/5E77861E" Ref="#GND017"  Part="1" 
+AR Path="/5E4C7A30/5E77861E" Ref="#GND?"  Part="1" 
+F 0 "#GND017" H 10850 5450 45  0001 L BNN
+F 1 "GND" H 10800 5330 45  0000 C CNN
+F 2 "" H 10800 5400 60  0001 C CNN
+F 3 "" H 10800 5400 60  0001 C CNN
+	1    10800 5500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C5
+U 1 1 5E778624
+P 9550 5400
+AR Path="/5E778624" Ref="C5"  Part="1" 
+AR Path="/5E4C7A30/5E778624" Ref="C?"  Part="1" 
+F 0 "C5" H 9642 5446 50  0000 L CNN
+F 1 "1 nF" H 9642 5355 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 9550 5400 50  0001 C CNN
+F 3 "~" H 9550 5400 50  0001 C CNN
+	1    9550 5400
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	9550 5200 9550 5250
+Connection ~ 9550 5250
+Wire Wire Line
+	9550 5250 9550 5300
+Wire Wire Line
+	10400 5250 10450 5250
+Wire Wire Line
+	10700 5250 10800 5250
+Wire Wire Line
+	10800 5250 10800 5500
+Wire Wire Line
+	9150 5250 9550 5250
+Text Label 9150 5250 0    50   ~ 0
+BUTTON
+$Comp
+L Connector_Generic:Conn_01x02 J?
+U 1 1 5E77863B
+P 10150 5950
+AR Path="/5E4C7A30/5E77863B" Ref="J?"  Part="1" 
+AR Path="/5E77863B" Ref="J3"  Part="1" 
+F 0 "J3" V 10050 5650 50  0000 L CNN
+F 1 "PUSH_button" V 10150 5250 50  0000 L CNN
+F 2 "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" H 10150 5950 50  0001 C CNN
+F 3 "~" H 10150 5950 50  0001 C CNN
+	1    10150 5950
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	10450 5250 10450 5550
+Wire Wire Line
+	10450 5550 10250 5550
+Wire Wire Line
+	10250 5550 10250 5750
+Connection ~ 10450 5250
+Wire Wire Line
+	10450 5250 10500 5250
+Wire Wire Line
+	9950 5250 9950 5550
+Wire Wire Line
+	9950 5550 10150 5550
+Wire Wire Line
+	10150 5550 10150 5750
+Connection ~ 9950 5250
+Wire Wire Line
+	9950 5250 10000 5250
+$Comp
+L Device:R_Small R16
+U 1 1 5E77864B
+P 10600 5250
+AR Path="/5E77864B" Ref="R16"  Part="1" 
+AR Path="/5E4C7A30/5E77864B" Ref="R?"  Part="1" 
+F 0 "R16" V 10400 5250 50  0000 C CNN
+F 1 "100 Ω" V 10500 5250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10600 5250 50  0001 C CNN
+F 3 "~" H 10600 5250 50  0001 C CNN
+	1    10600 5250
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Small R13
+U 1 1 5E778651
+P 9550 5100
+AR Path="/5E778651" Ref="R13"  Part="1" 
+AR Path="/5E4C7A30/5E778651" Ref="R?"  Part="1" 
+F 0 "R13" H 9491 5054 50  0000 R CNN
+F 1 "1 MΩ" H 9491 5145 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 9550 5100 50  0001 C CNN
+F 3 "~" H 9550 5100 50  0001 C CNN
+	1    9550 5100
+	-1   0    0    1   
+$EndComp
+$Sheet
+S 5250 3250 1750 2000
+U 5E4C7A30
+F0 "EFM32HG222" 50
+F1 "EFM32HG222.sch" 50
+F2 "ADC_CH4" I L 5250 3350 50 
+F3 "ADC_CH5" I L 5250 3450 50 
+F4 "ADC_CH6" I L 5250 3550 50 
+F5 "ADC_CH7" I L 5250 3650 50 
+F6 "BG96_RXD" O R 7000 3450 50 
+F7 "BG96_TXD" I R 7000 3350 50 
+F8 "BG96_PWRKEY" O R 7000 3550 50 
+F9 "BG96_STAT" I R 7000 3650 50 
+F10 "BG96_~RESET" O R 7000 3750 50 
+F11 "SCL" O L 5250 4350 50 
+F12 "PCNT" I R 7000 5050 50 
+F13 "PCNT_spare" O R 7000 5150 50 
+F14 "VL53L1X_XSHUT" O L 5250 5050 50 
+F15 "VL53L1X_GPIO1" O L 5250 5150 50 
+F16 "SDA" B L 5250 4450 50 
+F17 "BUTTON" I R 7000 4850 50 
+F18 "DS18B20_DATA" B R 7000 4350 50 
+F19 "DS18B20_VDD" O R 7000 4450 50 
+F20 "DS18B20_DATA_spare" B R 7000 4550 50 
+F21 "DS18B20_VDD_spare" O R 7000 4650 50 
+F22 "BG96_DTR" O R 7000 3850 50 
+F23 "BG96_RI" I R 7000 3950 50 
+$EndSheet
+$Comp
+L Connector_Generic:Conn_01x03 J?
+U 1 1 5E78BFF3
+P 10450 1100
+AR Path="/5E4C7A30/5E78BFF3" Ref="J?"  Part="1" 
+AR Path="/5E78BFF3" Ref="J6"  Part="1" 
+F 0 "J6" H 10530 1142 50  0000 L CNN
+F 1 "DS18B20" H 10530 1051 50  0000 L CNN
+F 2 "Connector_Phoenix_PTSA_extra:PhoenixContact_PTSA_1,5_3-G-3,5_1x03_P3.50mm_Angled" H 10450 1100 50  0001 C CNN
+F 3 "~" H 10450 1100 50  0001 C CNN
+	1    10450 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x03 J?
+U 1 1 5E78BFF9
+P 10450 2250
+AR Path="/5E4C7A30/5E78BFF9" Ref="J?"  Part="1" 
+AR Path="/5E78BFF9" Ref="J7"  Part="1" 
+F 0 "J7" H 10530 2292 50  0000 L CNN
+F 1 "DS18B20_spare" H 10530 2201 50  0000 L CNN
+F 2 "Connector_Phoenix_PTSA_extra:PhoenixContact_PTSA_1,5_3-G-3,5_1x03_P3.50mm_Angled" H 10450 2250 50  0001 C CNN
+F 3 "~" H 10450 2250 50  0001 C CNN
+	1    10450 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R14
+U 1 1 5E78BFFF
+P 10000 1050
+AR Path="/5E78BFFF" Ref="R14"  Part="1" 
+AR Path="/5E4C7A30/5E78BFFF" Ref="R?"  Part="1" 
+F 0 "R14" H 9942 1004 50  0000 R CNN
+F 1 "10 kΩ" H 9942 1095 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10000 1050 50  0001 C CNN
+F 3 "~" H 10000 1050 50  0001 C CNN
+	1    10000 1050
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:R_Small R15
+U 1 1 5E78C005
+P 10000 2200
+AR Path="/5E78C005" Ref="R15"  Part="1" 
+AR Path="/5E4C7A30/5E78C005" Ref="R?"  Part="1" 
+F 0 "R15" H 9942 2154 50  0000 R CNN
+F 1 "10 kΩ" H 9942 2245 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 10000 2200 50  0001 C CNN
+F 3 "~" H 10000 2200 50  0001 C CNN
+	1    10000 2200
+	1    0    0    1   
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:GND #GND015
+U 1 1 5E78C00B
+P 10200 1250
+AR Path="/5E78C00B" Ref="#GND015"  Part="1" 
+AR Path="/5E4C7A30/5E78C00B" Ref="#GND?"  Part="1" 
+F 0 "#GND015" H 10250 1200 45  0001 L BNN
+F 1 "GND" H 10200 1080 45  0000 C CNN
+F 2 "" H 10200 1150 60  0001 C CNN
+F 3 "" H 10200 1150 60  0001 C CNN
+	1    10200 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:GND #GND016
+U 1 1 5E78C011
+P 10200 2400
+AR Path="/5E78C011" Ref="#GND016"  Part="1" 
+AR Path="/5E4C7A30/5E78C011" Ref="#GND?"  Part="1" 
+F 0 "#GND016" H 10250 2350 45  0001 L BNN
+F 1 "GND" H 10200 2230 45  0000 C CNN
+F 2 "" H 10200 2300 60  0001 C CNN
+F 3 "" H 10200 2300 60  0001 C CNN
+	1    10200 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 1100 10100 1100
+Wire Wire Line
+	10100 1100 10100 1200
+Wire Wire Line
+	10100 1200 10000 1200
+Wire Wire Line
+	10000 1200 10000 1150
+Wire Wire Line
+	10250 1200 10200 1200
+Wire Wire Line
+	10200 1200 10200 1250
+Wire Wire Line
+	10250 2350 10200 2350
+Wire Wire Line
+	10200 2350 10200 2400
+Wire Wire Line
+	10250 2250 10100 2250
+Wire Wire Line
+	10100 2250 10100 2350
+Wire Wire Line
+	10100 2350 10000 2350
+Wire Wire Line
+	10000 2350 10000 2300
+Wire Wire Line
+	10250 2150 10100 2150
+Wire Wire Line
+	10100 2150 10100 2050
+Wire Wire Line
+	10100 2050 10000 2050
+Wire Wire Line
+	10000 2100 10000 2050
+Connection ~ 10000 2050
+Wire Wire Line
+	10000 2050 9150 2050
+Wire Wire Line
+	9150 2350 10000 2350
+Connection ~ 10000 2350
+Wire Wire Line
+	10250 1000 10100 1000
+Wire Wire Line
+	10100 1000 10100 900 
+Wire Wire Line
+	10100 900  10000 900 
+Wire Wire Line
+	10000 900  10000 950 
+Wire Wire Line
+	10000 900  9150 900 
+Connection ~ 10000 900 
+Wire Wire Line
+	9150 1200 10000 1200
+Connection ~ 10000 1200
+Wire Wire Line
+	7000 4850 7850 4850
+Text Label 7850 4850 2    50   ~ 0
+BUTTON
+Wire Wire Line
+	7000 4350 7850 4350
+Wire Wire Line
+	7000 4450 7850 4450
+Wire Wire Line
+	7000 4550 7850 4550
+Wire Wire Line
+	7000 4650 7850 4650
+Text Label 7850 4350 2    50   ~ 0
+DS18B20_DATA
+Text Label 7850 4450 2    50   ~ 0
+DS18B20_VDD
+Text Label 7850 4550 2    50   ~ 0
+DS18B20_DATA_spare
+Text Label 7850 4650 2    50   ~ 0
+DS18B20_VDD_spare
+Text Label 9150 900  0    50   ~ 0
+DS18B20_DATA
+Text Label 9150 1200 0    50   ~ 0
+DS18B20_VDD
+Text Label 9150 2050 0    50   ~ 0
+DS18B20_DATA_spare
+Text Label 9150 2350 0    50   ~ 0
+DS18B20_VDD_spare
+$Comp
+L Connector_Generic:Conn_01x04 J5
+U 1 1 5E8D4077
+P 10300 4150
+F 0 "J5" H 10380 4142 50  0000 L CNN
+F 1 "SHT-30" H 10380 4051 50  0000 L CNN
+F 2 "Connector_Phoenix_PTSA_extra:PhoenixContact_PTSA_1,5_4-G-3,5_1x04_P3.50mm_Angled" H 10300 4150 50  0001 C CNN
+F 3 "~" H 10300 4150 50  0001 C CNN
+	1    10300 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J1
+U 1 1 5E8D49C5
+P 850 6700
+F 0 "J1" H 800 6800 50  0000 L CNN
+F 1 "PCNT" H 700 6500 50  0000 L CNN
+F 2 "Connector_Phoenix_PTSA_extra:PhoenixContact_PTSA_1,5_2-G-3,5_1x02_P3.50mm_Angled" H 850 6700 50  0001 C CNN
+F 3 "~" H 850 6700 50  0001 C CNN
+	1    850  6700
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x06 J4
+U 1 1 5E4D8F3C
+P 10300 3200
+F 0 "J4" H 10380 3192 50  0000 L CNN
+F 1 "VL51L1X" H 10380 3101 50  0000 L CNN
+F 2 "Connector_Phoenix_PTSA_extra:PhoenixContact_PTSA_1,5_6-G-3,5_1x06_P3.50mm_Angled" H 10300 3200 50  0001 C CNN
+F 3 "~" H 10300 3200 50  0001 C CNN
+	1    10300 3200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP14
+U 1 1 5E54EE93
+P 10000 800
+F 0 "TP14" H 9950 950 50  0000 R CNN
+F 1 "DS18B20_DATA" H 9950 850 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 10200 800 50  0001 C CNN
+F 3 "~" H 10200 800 50  0001 C CNN
+	1    10000 800 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP15
+U 1 1 5E567287
+P 10000 1300
+F 0 "TP15" H 10050 1350 50  0000 L CNN
+F 1 "DS18B20_VDD" H 10050 1450 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 10200 1300 50  0001 C CNN
+F 3 "~" H 10200 1300 50  0001 C CNN
+	1    10000 1300
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	10000 900  10000 800 
+Wire Wire Line
+	10000 1200 10000 1300
+$Comp
+L Connector:TestPoint TP16
+U 1 1 5E57B868
+P 10000 1950
+F 0 "TP16" H 9950 2100 50  0000 R CNN
+F 1 "DS18B20_DATA_spare" H 9950 2000 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 10200 1950 50  0001 C CNN
+F 3 "~" H 10200 1950 50  0001 C CNN
+	1    10000 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP17
+U 1 1 5E57C229
+P 10000 2450
+F 0 "TP17" H 10050 2500 50  0000 L CNN
+F 1 "DS18B20_VDD_spare" H 10050 2600 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 10200 2450 50  0001 C CNN
+F 3 "~" H 10200 2450 50  0001 C CNN
+	1    10000 2450
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	10000 2450 10000 2350
+Wire Wire Line
+	10000 1950 10000 2050
+Text Notes 10400 4400 0    50   ~ 0
+3-5V
+Text Notes 10400 3450 0    50   ~ 0
+2.8-5V
+Wire Wire Line
+	7000 5050 7850 5050
+Wire Wire Line
+	7000 5150 7850 5150
+$Comp
+L power:+3V8 #PWR09
+U 1 1 5E5B0F74
+P 2450 2950
+F 0 "#PWR09" H 2450 2800 50  0001 C CNN
+F 1 "+3V8" H 2465 3123 50  0000 C CNN
+F 2 "" H 2450 2950 50  0001 C CNN
+F 3 "" H 2450 2950 50  0001 C CNN
+	1    2450 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5E5BCBDF
+P 2050 3150
+AR Path="/5E914D66/5E5BCBDF" Ref="C?"  Part="1" 
+AR Path="/5E5BCBDF" Ref="C1"  Part="1" 
+F 0 "C1" H 2142 3196 50  0000 L CNN
+F 1 "100 nF" H 2142 3105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2050 3150 50  0001 C CNN
+F 3 "~" H 2050 3150 50  0001 C CNN
+	1    2050 3150
+	-1   0    0    -1  
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:GND #GND?
+U 1 1 5E5BCBE5
+P 2050 3250
+AR Path="/5E914D66/5E5BCBE5" Ref="#GND?"  Part="1" 
+AR Path="/5E5BCBE5" Ref="#GND04"  Part="1" 
+F 0 "#GND04" H 2100 3200 45  0001 L BNN
+F 1 "GND" H 2050 3080 45  0000 C CNN
+F 2 "" H 2050 3150 60  0001 C CNN
+F 3 "" H 2050 3150 60  0001 C CNN
+	1    2050 3250
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5E5C921D
+P 2650 3150
+AR Path="/5E914D66/5E5C921D" Ref="C?"  Part="1" 
+AR Path="/5E5C921D" Ref="C2"  Part="1" 
+F 0 "C2" H 2742 3196 50  0000 L CNN
+F 1 "100 nF" H 2742 3105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2650 3150 50  0001 C CNN
+F 3 "~" H 2650 3150 50  0001 C CNN
+	1    2650 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:GND #GND?
+U 1 1 5E5C9223
+P 2650 3250
+AR Path="/5E914D66/5E5C9223" Ref="#GND?"  Part="1" 
+AR Path="/5E5C9223" Ref="#GND06"  Part="1" 
+F 0 "#GND06" H 2700 3200 45  0001 L BNN
+F 1 "GND" H 2650 3080 45  0000 C CNN
+F 2 "" H 2650 3150 60  0001 C CNN
+F 3 "" H 2650 3150 60  0001 C CNN
+	1    2650 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 2950 2450 3000
+Wire Wire Line
+	2650 3050 2650 3000
+Wire Wire Line
+	2650 3000 2450 3000
+Connection ~ 2450 3000
+Wire Wire Line
+	2450 3000 2450 3450
+Wire Wire Line
+	2250 2950 2250 3000
+Wire Wire Line
+	2250 3000 2050 3000
+Wire Wire Line
+	2050 3000 2050 3050
+Connection ~ 2250 3000
+Wire Wire Line
+	2250 3000 2250 3450
+Wire Wire Line
+	5250 4350 4750 4350
+Wire Wire Line
+	5250 4450 4750 4450
+Text Label 4750 4350 0    50   ~ 0
+SCL_3V3
+Text Label 4750 4450 0    50   ~ 0
+SDA_3V3
+Wire Wire Line
+	1950 3850 1450 3850
+Wire Wire Line
+	1950 4050 1450 4050
+Text Label 1450 3850 0    50   ~ 0
+SCL_3V3
+Text Label 1450 4050 0    50   ~ 0
+SDA_3V3
+Wire Wire Line
+	2750 3850 3200 3850
+Wire Wire Line
+	2750 4050 3200 4050
+Text Label 3200 3850 2    50   ~ 0
+SCL_3V8
+Text Label 3200 4050 2    50   ~ 0
+SDA_3V8
+$Comp
+L SparkFun-PowerSymbols:GND #GND?
+U 1 1 5E632277
+P 2350 4850
+AR Path="/5E914D66/5E632277" Ref="#GND?"  Part="1" 
+AR Path="/5E632277" Ref="#GND05"  Part="1" 
+F 0 "#GND05" H 2400 4800 45  0001 L BNN
+F 1 "GND" H 2350 4680 45  0000 C CNN
+F 2 "" H 2350 4750 60  0001 C CNN
+F 3 "" H 2350 4750 60  0001 C CNN
+	1    2350 4850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R1
+U 1 1 5E682387
+P 700 900
+AR Path="/5E682387" Ref="R1"  Part="1" 
+AR Path="/5E4C7A30/5E682387" Ref="R?"  Part="1" 
+F 0 "R1" H 650 800 50  0000 R CNN
+F 1 "10 kΩ" H 650 900 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 700 900 50  0001 C CNN
+F 3 "~" H 700 900 50  0001 C CNN
+F 4 "NM" H 650 1000 50  0000 R CNN "Mounted"
+	1    700  900 
+	-1   0    0    1   
+$EndComp
+$Comp
+L Logic_LevelTranslator_extra:TXS0104EPWR U1
+U 1 1 5E5C080D
+P 2350 4150
+F 0 "U1" H 2100 3500 50  0000 C CNN
+F 1 "TXS0104EPWR" H 2700 3500 50  0000 C CNN
+F 2 "Package_SO:TSSOP-14_4.4x5mm_P0.65mm" H 2350 3500 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/txs0104e.pdf" H 2350 4330 50  0001 C CNN
+	1    2350 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 4250 3200 4250
+Wire Wire Line
+	2750 4450 3200 4450
+Wire Wire Line
+	5250 5050 4750 5050
+Wire Wire Line
+	5250 5150 4750 5150
+Text Label 4750 5050 0    50   ~ 0
+XSHUT_3V3
+Text Label 4750 5150 0    50   ~ 0
+GPIO1_3V3
+Text Label 1450 4250 0    50   ~ 0
+XSHUT_3V3
+Text Label 1450 4450 0    50   ~ 0
+GPIO1_3V3
+Text Label 3200 4250 2    50   ~ 0
+XSHUT_3V8
+Text Label 3200 4450 2    50   ~ 0
+GPIO1_3V8
+Wire Wire Line
+	1950 4250 1450 4250
+Wire Wire Line
+	1950 4450 1450 4450
+Wire Wire Line
+	7000 3850 7250 3850
+Wire Wire Line
+	7000 3950 7250 3950
+Text Label 7850 5050 2    50   ~ 0
+PCNT
+Text Label 7850 5150 2    50   ~ 0
+PCNT_spare
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E998D33
+P 2150 950
+AR Path="/5E914D66/5E998D33" Ref="TP?"  Part="1" 
+AR Path="/5E998D33" Ref="TP3"  Part="1" 
+F 0 "TP3" H 2208 1068 50  0000 L CNN
+F 1 "SCL_3V3" H 2208 977 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 2350 950 50  0001 C CNN
+F 3 "~" H 2350 950 50  0001 C CNN
+	1    2150 950 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 950  2150 1050
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E998D3C
+P 2150 1300
+AR Path="/5E914D66/5E998D3C" Ref="TP?"  Part="1" 
+AR Path="/5E998D3C" Ref="TP4"  Part="1" 
+F 0 "TP4" H 2208 1418 50  0000 L CNN
+F 1 "SCL_3V8" H 2208 1327 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 2350 1300 50  0001 C CNN
+F 3 "~" H 2350 1300 50  0001 C CNN
+	1    2150 1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 1300 2150 1400
+Wire Wire Line
+	2150 1400 2550 1400
+Wire Wire Line
+	2150 1050 2550 1050
+Text Label 2550 1050 2    50   ~ 0
+SCL_3V3
+Text Label 2550 1400 2    50   ~ 0
+SCL_3V8
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E9AD7F4
+P 2650 950
+AR Path="/5E914D66/5E9AD7F4" Ref="TP?"  Part="1" 
+AR Path="/5E9AD7F4" Ref="TP6"  Part="1" 
+F 0 "TP6" H 2708 1068 50  0000 L CNN
+F 1 "SDA_3V3" H 2708 977 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 2850 950 50  0001 C CNN
+F 3 "~" H 2850 950 50  0001 C CNN
+	1    2650 950 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 950  2650 1050
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E9AD7FB
+P 2650 1300
+AR Path="/5E914D66/5E9AD7FB" Ref="TP?"  Part="1" 
+AR Path="/5E9AD7FB" Ref="TP7"  Part="1" 
+F 0 "TP7" H 2708 1418 50  0000 L CNN
+F 1 "SDA_3V8" H 2708 1327 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 2850 1300 50  0001 C CNN
+F 3 "~" H 2850 1300 50  0001 C CNN
+	1    2650 1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 1300 2650 1400
+Wire Wire Line
+	2650 1400 3050 1400
+Wire Wire Line
+	2650 1050 3050 1050
+Text Label 3050 1050 2    50   ~ 0
+SDA_3V3
+Text Label 3050 1400 2    50   ~ 0
+SDA_3V8
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E9B62A6
+P 3150 950
+AR Path="/5E914D66/5E9B62A6" Ref="TP?"  Part="1" 
+AR Path="/5E9B62A6" Ref="TP8"  Part="1" 
+F 0 "TP8" H 3208 1068 50  0000 L CNN
+F 1 "XSHUT_3V3" H 3208 977 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 3350 950 50  0001 C CNN
+F 3 "~" H 3350 950 50  0001 C CNN
+	1    3150 950 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3150 950  3150 1050
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E9B62AD
+P 3150 1300
+AR Path="/5E914D66/5E9B62AD" Ref="TP?"  Part="1" 
+AR Path="/5E9B62AD" Ref="TP9"  Part="1" 
+F 0 "TP9" H 3208 1418 50  0000 L CNN
+F 1 "XSHUT_3V8" H 3208 1327 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 3350 1300 50  0001 C CNN
+F 3 "~" H 3350 1300 50  0001 C CNN
+	1    3150 1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3150 1300 3150 1400
+Wire Wire Line
+	3150 1400 3650 1400
+Wire Wire Line
+	3150 1050 3650 1050
+Text Label 3650 1050 2    50   ~ 0
+XSHUT_3V3
+Text Label 3650 1400 2    50   ~ 0
+XSHUT_3V8
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E9BF5D9
+P 3750 950
+AR Path="/5E914D66/5E9BF5D9" Ref="TP?"  Part="1" 
+AR Path="/5E9BF5D9" Ref="TP10"  Part="1" 
+F 0 "TP10" H 3808 1068 50  0000 L CNN
+F 1 "GPIO1_3V3" H 3808 977 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 3950 950 50  0001 C CNN
+F 3 "~" H 3950 950 50  0001 C CNN
+	1    3750 950 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 950  3750 1050
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E9BF5E0
+P 3750 1300
+AR Path="/5E914D66/5E9BF5E0" Ref="TP?"  Part="1" 
+AR Path="/5E9BF5E0" Ref="TP11"  Part="1" 
+F 0 "TP11" H 3808 1418 50  0000 L CNN
+F 1 "GPIO1_3V8" H 3808 1327 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 3950 1300 50  0001 C CNN
+F 3 "~" H 3950 1300 50  0001 C CNN
+	1    3750 1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 1300 3750 1400
+Wire Wire Line
+	3750 1400 4250 1400
+Wire Wire Line
+	3750 1050 4250 1050
+Text Label 4250 1050 2    50   ~ 0
+GPIO1_3V3
+Text Label 4250 1400 2    50   ~ 0
+GPIO1_3V8
+Wire Wire Line
+	10100 4150 9600 4150
+Wire Wire Line
+	10100 4050 9600 4050
+Text Label 9600 4150 0    50   ~ 0
+SCL_3V3
+Text Label 9600 4050 0    50   ~ 0
+SDA_3V3
+Wire Wire Line
+	9400 4250 9400 4200
+Wire Wire Line
+	10100 4250 9400 4250
+Wire Wire Line
+	9400 4350 9400 4400
+Wire Wire Line
+	10100 4350 9400 4350
+$Comp
+L SparkFun-PowerSymbols:GND #GND013
+U 1 1 5E6D4FBC
+P 9400 4400
+F 0 "#GND013" H 9450 4350 45  0001 L BNN
+F 1 "GND" H 9400 4230 45  0000 C CNN
+F 2 "" H 9400 4300 60  0001 C CNN
+F 3 "" H 9400 4300 60  0001 C CNN
+	1    9400 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9400 3500 9400 3550
+Wire Wire Line
+	10100 3500 9400 3500
+Wire Wire Line
+	9400 3400 9400 3350
+Wire Wire Line
+	10100 3400 9400 3400
+$Comp
+L SparkFun-PowerSymbols:GND #GND012
+U 1 1 5E62EC20
+P 9400 3550
+F 0 "#GND012" H 9450 3500 45  0001 L BNN
+F 1 "GND" H 9400 3380 45  0000 C CNN
+F 2 "" H 9400 3450 60  0001 C CNN
+F 3 "" H 9400 3450 60  0001 C CNN
+	1    9400 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V8 #PWR013
+U 1 1 5E60A68D
+P 9400 3350
+F 0 "#PWR013" H 9400 3200 50  0001 C CNN
+F 1 "+3V8" H 9415 3523 50  0000 C CNN
+F 2 "" H 9400 3350 50  0001 C CNN
+F 3 "" H 9400 3350 50  0001 C CNN
+	1    9400 3350
+	1    0    0    -1  
+$EndComp
+Text Label 9600 3300 0    50   ~ 0
+GPIO1_3V8
+Text Label 9600 3200 0    50   ~ 0
+XSHUT_3V8
+Text Label 9600 3100 0    50   ~ 0
+SCL_3V8
+Text Label 9600 3000 0    50   ~ 0
+SDA_3V8
+Wire Wire Line
+	10100 3300 9600 3300
+Wire Wire Line
+	10100 3200 9600 3200
+Wire Wire Line
+	10100 3100 9600 3100
+Wire Wire Line
+	10100 3000 9600 3000
+Wire Wire Line
+	700  1000 700  1150
+Wire Wire Line
+	700  1150 1100 1150
+Text Label 1100 1150 2    50   ~ 0
+SCL_3V3
+$Comp
+L Device:R_Small R2
+U 1 1 5EEF7A2D
+P 700 1550
+AR Path="/5EEF7A2D" Ref="R2"  Part="1" 
+AR Path="/5E4C7A30/5EEF7A2D" Ref="R?"  Part="1" 
+F 0 "R2" H 650 1450 50  0000 R CNN
+F 1 "10 kΩ" H 650 1550 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 700 1550 50  0001 C CNN
+F 3 "~" H 700 1550 50  0001 C CNN
+F 4 "NM" H 650 1650 50  0000 R CNN "Mounted"
+	1    700  1550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	700  1650 700  1800
+Wire Wire Line
+	700  1800 1100 1800
+Text Label 1100 1800 2    50   ~ 0
+SDA_3V3
+$Comp
+L Device:R_Small R5
+U 1 1 5EF01782
+P 1250 900
+AR Path="/5EF01782" Ref="R5"  Part="1" 
+AR Path="/5E4C7A30/5EF01782" Ref="R?"  Part="1" 
+F 0 "R5" H 1200 800 50  0000 R CNN
+F 1 "10 kΩ" H 1200 900 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1250 900 50  0001 C CNN
+F 3 "~" H 1250 900 50  0001 C CNN
+F 4 "NM" H 1200 1000 50  0000 R CNN "Mounted"
+	1    1250 900 
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1250 1000 1250 1150
+Wire Wire Line
+	1250 1150 1650 1150
+Text Label 1650 1150 2    50   ~ 0
+SCL_3V8
+$Comp
+L Device:R_Small R6
+U 1 1 5EF0B718
+P 1250 1550
+AR Path="/5EF0B718" Ref="R6"  Part="1" 
+AR Path="/5E4C7A30/5EF0B718" Ref="R?"  Part="1" 
+F 0 "R6" H 1200 1450 50  0000 R CNN
+F 1 "10 kΩ" H 1200 1550 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1250 1550 50  0001 C CNN
+F 3 "~" H 1250 1550 50  0001 C CNN
+F 4 "NM" H 1200 1650 50  0000 R CNN "Mounted"
+	1    1250 1550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1250 1650 1250 1800
+Wire Wire Line
+	1250 1800 1650 1800
+Text Label 1650 1800 2    50   ~ 0
+SDA_3V8
+$Comp
+L power:+3V8 #PWR04
+U 1 1 5EF1515C
+P 1250 800
+F 0 "#PWR04" H 1250 650 50  0001 C CNN
+F 1 "+3V8" H 1265 973 50  0000 C CNN
+F 2 "" H 1250 800 50  0001 C CNN
+F 3 "" H 1250 800 50  0001 C CNN
+	1    1250 800 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V8 #PWR05
+U 1 1 5EF1725A
+P 1250 1450
+F 0 "#PWR05" H 1250 1300 50  0001 C CNN
+F 1 "+3V8" H 1265 1623 50  0000 C CNN
+F 2 "" H 1250 1450 50  0001 C CNN
+F 3 "" H 1250 1450 50  0001 C CNN
+	1    1250 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP1
+U 1 1 5E57C578
+P 1450 4750
+F 0 "TP1" H 1508 4868 50  0000 L CNN
+F 1 "TXS0104_OE" H 1508 4777 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 1650 4750 50  0001 C CNN
+F 3 "~" H 1650 4750 50  0001 C CNN
+	1    1450 4750
+	1    0    0    1   
+$EndComp
+$Comp
+L Display_Character_extra:Sparkfun_20x4_serLCD U2
+U 1 1 5E5A8272
+P 7700 1000
+F 0 "U2" H 6900 1300 50  0000 C CNN
+F 1 "Sparkfun_20x4_serLCD" H 8100 1300 50  0000 C CNN
+F 2 "Display_extra:Sparkfun_20x4_serLCD" H 8150 200 50  0001 C CNN
+F 3 "https://www.sparkfun.com/products/14074" H 8150 200 50  0001 C CNN
+	1    7700 1000
+	1    0    0    -1  
+$EndComp
+NoConn ~ 6950 1350
+NoConn ~ 7050 1350
+NoConn ~ 7150 1350
+NoConn ~ 7250 1350
+NoConn ~ 7350 1350
+NoConn ~ 7450 1350
+NoConn ~ 7550 1350
+NoConn ~ 7650 1350
+NoConn ~ 7750 1350
+NoConn ~ 7850 1350
+NoConn ~ 8050 1350
+NoConn ~ 7950 1350
+$Comp
+L SparkFun-PowerSymbols:GND #GND011
+U 1 1 5E69FFB7
+P 8450 1350
+F 0 "#GND011" H 8500 1300 45  0001 L BNN
+F 1 "GND" H 8450 1180 45  0000 C CNN
+F 2 "" H 8450 1250 60  0001 C CNN
+F 3 "" H 8450 1250 60  0001 C CNN
+	1    8450 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8150 1350 8150 1500
+Wire Wire Line
+	8150 1500 7800 1500
+Text Label 7800 1500 0    50   ~ 0
+SCL_3V3
+Wire Wire Line
+	8250 1350 8250 1600
+Wire Wire Line
+	8250 1600 7800 1600
+Text Label 7800 1600 0    50   ~ 0
+SDA_3V3
+Wire Wire Line
+	8350 1350 8350 1600
+Wire Wire Line
+	8350 1600 8600 1600
+Wire Wire Line
+	8600 1600 8600 1500
+$Comp
+L SparkFun-PowerSymbols:GND #GND014
+U 1 1 5E77862A
+P 9550 5500
+AR Path="/5E77862A" Ref="#GND014"  Part="1" 
+AR Path="/5E4C7A30/5E77862A" Ref="#GND?"  Part="1" 
+F 0 "#GND014" H 9600 5450 45  0001 L BNN
+F 1 "GND" H 9550 5330 45  0000 C CNN
+F 2 "" H 9550 5400 60  0001 C CNN
+F 3 "" H 9550 5400 60  0001 C CNN
+	1    9550 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9550 5250 9950 5250
+$Comp
+L Device:R_Small R?
+U 1 1 5E6C77AB
+P 1200 4500
+AR Path="/5E914D66/5E6C77AB" Ref="R?"  Part="1" 
+AR Path="/5E6C77AB" Ref="R3"  Part="1" 
+F 0 "R3" H 1250 4550 50  0000 L CNN
+F 1 "10 kΩ" H 1250 4450 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1200 4500 50  0001 C CNN
+F 3 "~" H 1200 4500 50  0001 C CNN
+F 4 "protection" H 1250 4350 50  0000 L CNN "Function"
+	1    1200 4500
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R?
+U 1 1 5E6C77B1
+P 1200 4800
+AR Path="/5E914D66/5E6C77B1" Ref="R?"  Part="1" 
+AR Path="/5E6C77B1" Ref="R4"  Part="1" 
+F 0 "R4" H 1250 4850 50  0000 L CNN
+F 1 "120 kΩ" H 1250 4750 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1200 4800 50  0001 C CNN
+F 3 "~" H 1200 4800 50  0001 C CNN
+F 4 "protection" H 1200 4800 50  0001 L CNN "Function"
+	1    1200 4800
+	-1   0    0    -1  
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:GND #GND?
+U 1 1 5E6C77BD
+P 1200 4900
+AR Path="/5E914D66/5E6C77BD" Ref="#GND?"  Part="1" 
+AR Path="/5E6C77BD" Ref="#GND01"  Part="1" 
+F 0 "#GND01" H 1250 4850 45  0001 L BNN
+F 1 "GND" H 1200 4730 45  0000 C CNN
+F 2 "" H 1200 4800 60  0001 C CNN
+F 3 "" H 1200 4800 60  0001 C CNN
+	1    1200 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1200 4600 1200 4650
+Connection ~ 1200 4650
+Wire Wire Line
+	1200 4650 1200 4700
+Wire Wire Line
+	1200 4650 1450 4650
+Wire Wire Line
+	1450 4750 1450 4650
+Connection ~ 1450 4650
+Wire Wire Line
+	1450 4650 1950 4650
+$Comp
+L power:+15V #PWR06
+U 1 1 5E5F5516
+P 1250 6450
+F 0 "#PWR06" H 1250 6300 50  0001 C CNN
+F 1 "+15V" H 1265 6623 50  0000 C CNN
+F 2 "" H 1250 6450 50  0001 C CNN
+F 3 "" H 1250 6450 50  0001 C CNN
+	1    1250 6450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1250 7050 1250 7100
+$Comp
+L Device:R_Small R7
+U 1 1 5E621C97
+P 1250 7200
+F 0 "R7" H 1309 7246 50  0000 L CNN
+F 1 "10 kΩ" H 1309 7155 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1250 7200 50  0001 C CNN
+F 3 "~" H 1250 7200 50  0001 C CNN
+	1    1250 7200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R8
+U 1 1 5E643085
+P 1750 6600
+F 0 "R8" H 1809 6646 50  0000 L CNN
+F 1 "10 kΩ" H 1809 6555 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 1750 6600 50  0001 C CNN
+F 3 "~" H 1750 6600 50  0001 C CNN
+	1    1750 6600
+	1    0    0    -1  
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:GND #GND03
+U 1 1 5E6BCDCF
+P 1750 7350
+F 0 "#GND03" H 1800 7300 45  0001 L BNN
+F 1 "GND" H 1750 7180 45  0000 C CNN
+F 2 "" H 1750 7250 60  0001 C CNN
+F 3 "" H 1750 7250 60  0001 C CNN
+	1    1750 7350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR01
+U 1 1 5E5F9EFC
+P 700 800
+F 0 "#PWR01" H 700 650 50  0001 C CNN
+F 1 "+3V3" H 715 973 50  0000 C CNN
+F 2 "" H 700 800 50  0001 C CNN
+F 3 "" H 700 800 50  0001 C CNN
+	1    700  800 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR02
+U 1 1 5E60ACED
+P 700 1450
+F 0 "#PWR02" H 700 1300 50  0001 C CNN
+F 1 "+3V3" H 715 1623 50  0000 C CNN
+F 2 "" H 700 1450 50  0001 C CNN
+F 3 "" H 700 1450 50  0001 C CNN
+	1    700  1450
+	1    0    0    -1  
+$EndComp
+Text Notes 650  2250 0    50   ~ 0
+I2C PULL-UP'S - NOT MOUNTED:\nTXS0104EPWR (open drain) has internal\n10kΩ pull-up resistors on A and B pins\n(if OE is HIGH)
+$Comp
+L power:+3V3 #PWR08
+U 1 1 5E6698D3
+P 2250 2950
+F 0 "#PWR08" H 2250 2800 50  0001 C CNN
+F 1 "+3V3" H 2265 3123 50  0000 C CNN
+F 2 "" H 2250 2950 50  0001 C CNN
+F 3 "" H 2250 2950 50  0001 C CNN
+	1    2250 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR014
+U 1 1 5E66FB78
+P 9400 4200
+F 0 "#PWR014" H 9400 4050 50  0001 C CNN
+F 1 "+3V3" H 9415 4373 50  0000 C CNN
+F 2 "" H 9400 4200 50  0001 C CNN
+F 3 "" H 9400 4200 50  0001 C CNN
+	1    9400 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR015
+U 1 1 5E671A52
+P 9550 5000
+F 0 "#PWR015" H 9550 4850 50  0001 C CNN
+F 1 "+3V3" H 9565 5173 50  0000 C CNN
+F 2 "" H 9550 5000 50  0001 C CNN
+F 3 "" H 9550 5000 50  0001 C CNN
+	1    9550 5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR07
+U 1 1 5E6726C7
+P 1750 6450
+F 0 "#PWR07" H 1750 6300 50  0001 C CNN
+F 1 "+3V3" H 1765 6623 50  0000 C CNN
+F 2 "" H 1750 6450 50  0001 C CNN
+F 3 "" H 1750 6450 50  0001 C CNN
+	1    1750 6450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR03
+U 1 1 5E679D34
+P 1200 4400
+F 0 "#PWR03" H 1200 4250 50  0001 C CNN
+F 1 "+3V3" H 1215 4573 50  0000 C CNN
+F 2 "" H 1200 4400 50  0001 C CNN
+F 3 "" H 1200 4400 50  0001 C CNN
+	1    1200 4400
+	1    0    0    -1  
+$EndComp
+$Sheet
+S 5250 2100 1750 750 
+U 5EA99407
+F0 "POWER" 50
+F1 "POWER.sch" 50
+$EndSheet
+Text Notes 1250 4650 0    50   ~ 0
+3,05 V
+$Comp
+L Transistor_FET:2N7002 Q1
+U 1 1 5E86B72A
+P 1650 7050
+F 0 "Q1" H 1855 7096 50  0000 L CNN
+F 1 "2N7002-7-F" H 1855 7005 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 1850 6975 50  0001 L CIN
+F 3 "https://www.mouser.be/datasheet/2/115/2N7002-1591994.pdf" H 1650 7050 50  0001 L CNN
+	1    1650 7050
+	1    0    0    -1  
+$EndComp
+Text Notes 600  6750 0    50   ~ 0
+S0+
+Text Notes 600  6850 0    50   ~ 0
+S0-
+Wire Wire Line
+	1750 6800 1750 6700
+Wire Wire Line
+	1750 6850 1750 6800
+Connection ~ 1750 6800
+Wire Wire Line
+	1450 7050 1250 7050
+Wire Wire Line
+	1250 7300 1250 7350
+Wire Wire Line
+	1750 7250 1750 7350
+Wire Wire Line
+	2500 6800 1750 6800
+Wire Wire Line
+	3000 6800 3250 6800
+$Comp
+L Device:R_Small R9
+U 1 1 5E770015
+P 2900 6800
+F 0 "R9" V 2704 6800 50  0000 C CNN
+F 1 "0 Ω" V 2795 6800 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2900 6800 50  0001 C CNN
+F 3 "~" H 2900 6800 50  0001 C CNN
+	1    2900 6800
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2500 7150 2500 7350
+$Comp
+L SparkFun-PowerSymbols:GND #GND07
+U 1 1 5E6B7992
+P 2500 7350
+F 0 "#GND07" H 2550 7300 45  0001 L BNN
+F 1 "GND" H 2500 7180 45  0000 C CNN
+F 2 "" H 2500 7250 60  0001 C CNN
+F 3 "" H 2500 7250 60  0001 C CNN
+	1    2500 7350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2500 6800 2500 6950
+Wire Wire Line
+	2500 6800 2800 6800
+Connection ~ 2500 6800
+Wire Wire Line
+	2500 6650 2500 6800
+$Comp
+L Device:C_Small C3
+U 1 1 5E671327
+P 2500 7050
+AR Path="/5E671327" Ref="C3"  Part="1" 
+AR Path="/5E4C7A30/5E671327" Ref="C?"  Part="1" 
+F 0 "C3" H 2600 7100 50  0000 L CNN
+F 1 "100 nF" H 2600 7000 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 2500 7050 50  0001 C CNN
+F 3 "~" H 2500 7050 50  0001 C CNN
+F 4 "optional" H 2600 6900 50  0000 L CNN "Function"
+	1    2500 7050
+	1    0    0    -1  
+$EndComp
+Text Label 3250 6800 2    50   ~ 0
+PCNT
+$Comp
+L Connector:TestPoint TP5
+U 1 1 5E5A1A39
+P 2500 6650
+F 0 "TP5" H 2558 6768 50  0000 L CNN
+F 1 "PCNT" H 2558 6677 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 2700 6650 50  0001 C CNN
+F 3 "~" H 2700 6650 50  0001 C CNN
+	1    2500 6650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J2
+U 1 1 5E9656AB
+P 3700 6700
+F 0 "J2" H 3650 6800 50  0000 L CNN
+F 1 "PCNT_spare" H 3300 6500 50  0000 L CNN
+F 2 "Connector_Phoenix_PTSA_extra:PhoenixContact_PTSA_1,5_2-G-3,5_1x02_P3.50mm_Angled" H 3700 6700 50  0001 C CNN
+F 3 "~" H 3700 6700 50  0001 C CNN
+	1    3700 6700
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:+15V #PWR010
+U 1 1 5E9656B1
+P 4300 6450
+F 0 "#PWR010" H 4300 6300 50  0001 C CNN
+F 1 "+15V" H 4315 6623 50  0000 C CNN
+F 2 "" H 4300 6450 50  0001 C CNN
+F 3 "" H 4300 6450 50  0001 C CNN
+	1    4300 6450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R10
+U 1 1 5E9656BB
+P 4300 7200
+F 0 "R10" H 4359 7246 50  0000 L CNN
+F 1 "10 kΩ" H 4359 7155 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4300 7200 50  0001 C CNN
+F 3 "~" H 4300 7200 50  0001 C CNN
+	1    4300 7200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R11
+U 1 1 5E9656C1
+P 4900 6600
+F 0 "R11" H 4959 6646 50  0000 L CNN
+F 1 "10 kΩ" H 4959 6555 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4900 6600 50  0001 C CNN
+F 3 "~" H 4900 6600 50  0001 C CNN
+	1    4900 6600
+	1    0    0    -1  
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:GND #GND09
+U 1 1 5E9656C7
+P 4900 7350
+F 0 "#GND09" H 4950 7300 45  0001 L BNN
+F 1 "GND" H 4900 7180 45  0000 C CNN
+F 2 "" H 4900 7250 60  0001 C CNN
+F 3 "" H 4900 7250 60  0001 C CNN
+	1    4900 7350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR011
+U 1 1 5E9656CD
+P 4900 6450
+F 0 "#PWR011" H 4900 6300 50  0001 C CNN
+F 1 "+3V3" H 4915 6623 50  0000 C CNN
+F 2 "" H 4900 6450 50  0001 C CNN
+F 3 "" H 4900 6450 50  0001 C CNN
+	1    4900 6450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:2N7002 Q2
+U 1 1 5E9656D3
+P 4800 7050
+F 0 "Q2" H 5005 7096 50  0000 L CNN
+F 1 "2N7002-7-F" H 5005 7005 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 5000 6975 50  0001 L CIN
+F 3 "https://www.mouser.be/datasheet/2/115/2N7002-1591994.pdf" H 4800 7050 50  0001 L CNN
+	1    4800 7050
+	1    0    0    -1  
+$EndComp
+Text Notes 3450 6750 0    50   ~ 0
+S0+
+Text Notes 3450 6850 0    50   ~ 0
+S0-
+Wire Wire Line
+	4900 6850 4900 6800
+Connection ~ 4900 6800
+Wire Wire Line
+	4300 7300 4300 7350
+Wire Wire Line
+	4900 7250 4900 7350
+Wire Wire Line
+	5650 6800 4900 6800
+Wire Wire Line
+	6350 6800 6850 6800
+$Comp
+L Device:R_Small R12
+U 1 1 5E9656EA
+P 6250 6800
+F 0 "R12" V 6054 6800 50  0000 C CNN
+F 1 "0 Ω" V 6145 6800 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 6250 6800 50  0001 C CNN
+F 3 "~" H 6250 6800 50  0001 C CNN
+	1    6250 6800
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5650 7150 5650 7350
+$Comp
+L SparkFun-PowerSymbols:GND #GND010
+U 1 1 5E9656F1
+P 5650 7350
+F 0 "#GND010" H 5700 7300 45  0001 L BNN
+F 1 "GND" H 5650 7180 45  0000 C CNN
+F 2 "" H 5650 7250 60  0001 C CNN
+F 3 "" H 5650 7250 60  0001 C CNN
+	1    5650 7350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5650 6800 5650 6950
+Wire Wire Line
+	5650 6800 6150 6800
+Connection ~ 5650 6800
+Wire Wire Line
+	5650 6650 5650 6800
+$Comp
+L Device:C_Small C4
+U 1 1 5E9656FC
+P 5650 7050
+AR Path="/5E9656FC" Ref="C4"  Part="1" 
+AR Path="/5E4C7A30/5E9656FC" Ref="C?"  Part="1" 
+F 0 "C4" H 5750 7100 50  0000 L CNN
+F 1 "100 nF" H 5750 7000 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5650 7050 50  0001 C CNN
+F 3 "~" H 5650 7050 50  0001 C CNN
+F 4 "optional" H 5750 6900 50  0000 L CNN "Function"
+	1    5650 7050
+	1    0    0    -1  
+$EndComp
+Text Label 6850 6800 2    50   ~ 0
+PCNT_spare
+$Comp
+L Connector:TestPoint TP13
+U 1 1 5E965703
+P 5650 6650
+F 0 "TP13" H 5708 6768 50  0000 L CNN
+F 1 "PCNT_spare" H 5708 6677 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 5850 6650 50  0001 C CNN
+F 3 "~" H 5850 6650 50  0001 C CNN
+	1    5650 6650
+	1    0    0    -1  
+$EndComp
+Text Notes 2800 700  0    50   ~ 0
+I2C TESTPOINTS
+Text Notes 2000 2650 0    50   ~ 0
+I2C LEVEL SHIFTER
+Text Notes 2750 6050 0    50   ~ 0
+PULSE COUNTER VOLTAGE CONVERSION
+$Comp
+L SparkFun-PowerSymbols:GND #GND02
+U 1 1 5EA34ADD
+P 1250 7350
+F 0 "#GND02" H 1300 7300 45  0001 L BNN
+F 1 "GND" H 1250 7180 45  0000 C CNN
+F 2 "" H 1250 7250 60  0001 C CNN
+F 3 "" H 1250 7250 60  0001 C CNN
+	1    1250 7350
+	1    0    0    -1  
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:GND #GND08
+U 1 1 5EA36872
+P 4300 7350
+F 0 "#GND08" H 4350 7300 45  0001 L BNN
+F 1 "GND" H 4300 7180 45  0000 C CNN
+F 2 "" H 4300 7250 60  0001 C CNN
+F 3 "" H 4300 7250 60  0001 C CNN
+	1    4300 7350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint_2Pole TP2
+U 1 1 5EB289B5
+P 1250 6750
+F 0 "TP2" V 1204 6808 50  0000 L CNN
+F 1 "PCNT" V 1295 6808 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1250 6750 50  0001 C CNN
+F 3 "~" H 1250 6750 50  0001 C CNN
+	1    1250 6750
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint_2Pole TP12
+U 1 1 5EB29244
+P 4300 6750
+F 0 "TP12" V 4254 6808 50  0000 L CNN
+F 1 "PCNT_spare" V 4345 6808 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 4300 6750 50  0001 C CNN
+F 3 "~" H 4300 6750 50  0001 C CNN
+	1    4300 6750
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1050 6700 1100 6700
+Wire Wire Line
+	1100 6700 1100 6550
+Wire Wire Line
+	1100 6550 1250 6550
+Wire Wire Line
+	1050 6800 1100 6800
+Wire Wire Line
+	1100 6800 1100 6950
+Wire Wire Line
+	1100 6950 1250 6950
+Wire Wire Line
+	1250 6450 1250 6550
+Connection ~ 1250 6550
+Wire Wire Line
+	1250 6950 1250 7050
+Connection ~ 1250 6950
+Connection ~ 1250 7050
+Wire Wire Line
+	1750 6500 1750 6450
+Wire Wire Line
+	3900 6700 4150 6700
+Wire Wire Line
+	4150 6700 4150 6550
+Wire Wire Line
+	4150 6550 4300 6550
+Wire Wire Line
+	3900 6800 4150 6800
+Wire Wire Line
+	4150 6800 4150 6950
+Wire Wire Line
+	4150 6950 4300 6950
+Wire Wire Line
+	4300 6950 4300 7050
+Connection ~ 4300 6950
+Wire Wire Line
+	4600 7050 4300 7050
+Connection ~ 4300 7050
+Wire Wire Line
+	4300 7050 4300 7100
+Wire Wire Line
+	4300 6550 4300 6450
+Connection ~ 4300 6550
+Wire Wire Line
+	4900 6450 4900 6500
+Wire Wire Line
+	4900 6700 4900 6800
+$Comp
+L Switch:SW_Push SW1
+U 1 1 5E778612
+P 10200 5250
+AR Path="/5E778612" Ref="SW1"  Part="1" 
+AR Path="/5E4C7A30/5E778612" Ref="SW?"  Part="1" 
+F 0 "SW1" H 10200 5535 50  0000 C CNN
+F 1 "SW_Push" H 10200 5444 50  0000 C CNN
+F 2 "Button_Switch_SMD:SW_SPST_FSMSM" H 10200 5450 50  0001 C CNN
+F 3 "~" H 10200 5450 50  0001 C CNN
+	1    10200 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V8 #PWR012
+U 1 1 5E7233DB
+P 8600 1500
+F 0 "#PWR012" H 8600 1350 50  0001 C CNN
+F 1 "+3V8" H 8615 1673 50  0000 C CNN
+F 2 "" H 8600 1500 50  0001 C CNN
+F 3 "" H 8600 1500 50  0001 C CNN
+	1    8600 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP47
+U 1 1 5E7085C8
+P 750 3050
+F 0 "TP47" H 808 3168 50  0000 L CNN
+F 1 "3V3" H 808 3077 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 950 3050 50  0001 C CNN
+F 3 "~" H 950 3050 50  0001 C CNN
+	1    750  3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR052
+U 1 1 5E708702
+P 1100 3100
+F 0 "#PWR052" H 1100 2950 50  0001 C CNN
+F 1 "+3V3" H 1115 3273 50  0000 C CNN
+F 2 "" H 1100 3100 50  0001 C CNN
+F 3 "" H 1100 3100 50  0001 C CNN
+	1    1100 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP48
+U 1 1 5E71A645
+P 750 3400
+F 0 "TP48" H 808 3518 50  0000 L CNN
+F 1 "3V8" H 808 3427 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 950 3400 50  0001 C CNN
+F 3 "~" H 950 3400 50  0001 C CNN
+	1    750  3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:TestPoint TP49
+U 1 1 5E71A9C1
+P 1400 3050
+F 0 "TP49" H 1458 3168 50  0000 L CNN
+F 1 "GND" H 1458 3077 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 1600 3050 50  0001 C CNN
+F 3 "~" H 1600 3050 50  0001 C CNN
+	1    1400 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V8 #PWR053
+U 1 1 5E71B07B
+P 1100 3450
+F 0 "#PWR053" H 1100 3300 50  0001 C CNN
+F 1 "+3V8" H 1115 3623 50  0000 C CNN
+F 2 "" H 1100 3450 50  0001 C CNN
+F 3 "" H 1100 3450 50  0001 C CNN
+	1    1100 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:GND #GND?
+U 1 1 5E71BCD9
+P 1400 3050
+AR Path="/5E914D66/5E71BCD9" Ref="#GND?"  Part="1" 
+AR Path="/5E71BCD9" Ref="#GND055"  Part="1" 
+F 0 "#GND055" H 1450 3000 45  0001 L BNN
+F 1 "GND" H 1400 2880 45  0000 C CNN
+F 2 "" H 1400 2950 60  0001 C CNN
+F 3 "" H 1400 2950 60  0001 C CNN
+	1    1400 3050
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	1100 3100 1100 3150
+Wire Wire Line
+	1100 3150 750  3150
+Wire Wire Line
+	750  3150 750  3050
+Wire Wire Line
+	1100 3450 1100 3500
+Wire Wire Line
+	1100 3500 750  3500
+Wire Wire Line
+	750  3500 750  3400
+$EndSCHEMATC
