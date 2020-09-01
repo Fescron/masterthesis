@@ -115,13 +115,13 @@ int8_t initVL53L1X (void)
 #endif /* DEBUG_DBPRINT */
 
 	/* Configure distance mode to short (1.3m), better ambient immunity */
-//	status = VL53L1X_SetDistanceMode(0x52, 2); /* default = long (4m in the dark with 200 ms timing budget) */
-//
-//#if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
-//#if DBPRINT_VERBOSE == 1 /* DBPRINT_VERBOSE */
-//	if (status != 0) dbcritInt("VL53L1X_SetDistanceMode status = ", status, "");
-//#endif /* DBPRINT_VERBOSE */
-//#endif /* DEBUG_DBPRINT */
+	status = VL53L1X_SetDistanceMode(0x52, 2); /* default = long (4m in the dark with 200 ms timing budget) */
+
+#if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
+#if DBPRINT_VERBOSE == 1 /* DBPRINT_VERBOSE */
+	if (status != 0) dbcritInt("VL53L1X_SetDistanceMode status = ", status, "");
+#endif /* DBPRINT_VERBOSE */
+#endif /* DEBUG_DBPRINT */
 
 	/* Configure inter-measurement period to 500 ms (IMP, has to be the same or greater than the timing budget) */
 	status = VL53L1X_SetInterMeasurementInMs(0x52, 500); /* default = 100 ms */
@@ -204,5 +204,4 @@ uint16_t measureVL53L1X (void)
 #endif /* DEBUG_DBPRINT */
 
 	return (distance);
-
 }

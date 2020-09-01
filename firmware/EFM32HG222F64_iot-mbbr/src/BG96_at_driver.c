@@ -692,6 +692,7 @@ bool waitForResponse (char *response, uint8_t timeout)
 		if (stringStartsWith((char *)rxBuf, response))
 		{
 
+			// Printing breaks timing!
 //#if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
 //			dbprint("INFO: > ");
 //			dbprint(response);
@@ -703,6 +704,7 @@ bool waitForResponse (char *response, uint8_t timeout)
 		else if (stringStartsWith((char *)rxBuf, "ERROR"))
 		{
 
+			// Printing breaks timing!
 //#if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
 //			dbcrit(" > ERROR");
 //#endif /* DEBUG_DBPRINT */

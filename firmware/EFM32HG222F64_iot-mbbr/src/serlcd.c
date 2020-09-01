@@ -214,7 +214,7 @@ int8_t clearLCD (void)
 int8_t writeCharLCD (uint8_t data)
 {
 	/* Initialize I2C if not already the case */
-	initI2C();
+	if (initI2C() != 0) return (-6);
 
 	/* Separate data in bytes */
 	uint8_t data_buf[1] = {data};

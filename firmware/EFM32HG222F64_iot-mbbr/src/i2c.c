@@ -90,7 +90,7 @@ int8_t initI2C (void)
 		I2C0->ROUTE = (I2C0->ROUTE & (~_I2C_ROUTE_LOCATION_MASK)) | BUS_I2C_LOC;
 
 		/* Initializing the I2C */
-		I2C_Init(I2C0, &i2cInit);
+		I2C_Init(BUS_I2C, &i2cInit);
 
 		/* Indicate that I2C is initialized */
 		I2C_initialized = true;
