@@ -59,6 +59,7 @@
 #include "serlcd.h"         /* serLCD functionality */
 #include "BG96_at_driver.h" /* BG96 functionality */
 #include "VL53L1X.h"        /* VL53L1X functionality */
+#include "SHT30.h"          /* SHT30 functionality */
 
 
 /* Local definitions */
@@ -67,6 +68,9 @@
 
 /** Enable (1) or disable (0) sending of messages (for debugging) */
 #define SENDING_DATA 1
+
+/** Maximum measured height for percent calculation [mm] */
+#define MAX_LENGTH_MM 300
 
 /** Time between each wake-up in seconds
  *    @li max 500 seconds when using LFXO delay
@@ -113,20 +117,32 @@ void displayMeas (void)
 	setCursorLCD(1, 2); /* Move to second row, first column */
 	writeStringLCD("T1 ");
 
-	char temp1_char[10]; // TODO: Use less chars here because we use uint16_t (check if values aren't bigger than 0xFFFF)
 	uint16_t temp1 = data.t1;
-	if (temp1 > 9999) temp1 /= 10; /* Remove last digit */
-	uint32_to_charDec(temp1, temp1_char); // TODO: display negative values!
+	if (data.t1 > 9999) temp1 /= 10; /* Remove last digit */ // TODO: round up/down!
+	uint8_t temp1L = temp1 / 100;
+	uint8_t temp1R = temp1 - ((temp1 / 100) * 100);
+	char temp1L_char[10]; // TODO: Use less chars here because we use uint16_t (check if values aren't bigger than 0xFFFF)
+	char temp1R_char[10]; // TODO: Use less chars here because we use uint16_t (check if values aren't bigger than 0xFFFF)
+	uint32_to_charDec(temp1L, temp1L_char); // TODO: display negative values!
+	uint32_to_charDec(temp1R, temp1R_char); // TODO: display negative values!
 
-	writeStringLCD(temp1_char);
-	writeStringLCD("C T2 ");
+	writeStringLCD(temp1L_char);
+	writeStringLCD(".");
+	writeStringLCD(temp1R_char);
+	writeStringLCD("C  T2 ");
 
-	char temp2_char[10]; // TODO: Use less chars here because we use uint16_t (check if values aren't bigger than 0xFFFF)
-	uint16_t temp2 = data.t2;
-	if (temp2 > 9999) temp2 /= 10; /* Remove last digit */
-	uint32_to_charDec(temp2, temp2_char); // TODO: display negative values!
+	uint16_t temp2= data.t2;
+	if (data.t2 > 9999) temp2 /= 10; /* Remove last digit */ // TODO: round up/down!
+	uint8_t temp2L = temp2 / 100;
+	uint8_t temp2R = temp2 - ((temp2 / 100) * 100);
+	char temp2L_char[10]; // TODO: Use less chars here because we use uint16_t (check if values aren't bigger than 0xFFFF)
+	char temp2R_char[10]; // TODO: Use less chars here because we use uint16_t (check if values aren't bigger than 0xFFFF)
+	uint32_to_charDec(temp2L, temp2L_char); // TODO: display negative values!
+	uint32_to_charDec(temp2R, temp2R_char); // TODO: display negative values!
 
-	writeStringLCD(temp2_char);
+	writeStringLCD(temp2L_char);
+	writeStringLCD(".");
+	writeStringLCD(temp2R_char);
 	writeStringLCD("C");
 
 	setCursorLCD(1, 3); /* Move to third row, first column */
@@ -136,12 +152,20 @@ void displayMeas (void)
 	uint32_to_charDec(data.n1, nitr1_char);
 
 	writeStringLCD(nitr1_char);
-	writeStringLCD(" N2 ");
+	writeStringLCD("mA N2 ");
 
 	char nitr2_char[10]; // TODO: Use less chars here because we use uint16_t (check if values aren't bigger than 0xFFFF)
 	uint32_to_charDec(data.n2, nitr2_char);
 
 	writeStringLCD(nitr2_char);
+	writeStringLCD("mA C");
+
+	char carbon_char[10]; // TODO: Use less chars here because we use uint16_t (check if values aren't bigger than 0xFFFF)
+	uint32_to_charDec(data.c, carbon_char);
+
+	writeStringLCD(carbon_char);
+	writeStringLCD("%");
+
 	setCursorLCD(1, 4); /* Move to fourth row, first column */
 	writeStringLCD("pH ");
 
@@ -149,12 +173,15 @@ void displayMeas (void)
 	uint32_to_charDec(data.p, pH_char);
 
 	writeStringLCD(pH_char);
-	writeStringLCD(" Redox ");
+	writeStringLCD("mA RP ");
 
 	char red_char[10]; // TODO: Use less chars here because we use uint16_t (check if values aren't bigger than 0xFFFF)
 	uint32_to_charDec(data.r, red_char);
 
 	writeStringLCD(red_char);
+	writeStringLCD("mA");
+
+	delay(50); // Quick fix
 }
 
 
@@ -180,13 +207,17 @@ int main (void)
 				dbprint_INIT(DBG_UART, DBG_UART_LOC, false, false);
 #endif  /* DEBUG_DBPRINT */
 
-				/* Initialize the LCD */
-				clearLCD();
-				writeStringLCD("Initializing ...");
-
 				/* Initialize delay and sleep functionality */
 				delay(0);
-				sleep(0);
+				sleep(2); /* Time so the I2C devices have time to start up */
+
+				/* Initialize the LCD */
+				clearLCD();
+				writeStringLCD("Initializing...");
+
+				/* Soft reset SHT30 */ // TODO: SHT30 (0x88) seems to respond to VL53L1X (0x52) commands and break the I2C bus until power cycle
+//				softResetSHT30();
+//				delay(2000);
 
 				/* Initialize GPIO wake-up */
 				initGPIOwakeup();
@@ -220,7 +251,8 @@ int main (void)
 			case MEASURE:
 			{
 				clearLCD();
-				writeStringLCD("Measuring ...");
+				writeStringLCD("Measuring...");
+				displayMeas(); /* Display measurements on following rows */
 
 				/* Measure and store the temperatures */
 				int32_t temp = readTempDS18B20(0);
@@ -231,15 +263,29 @@ int main (void)
 				if (temp < 0) data.t2 = 0;
 				else data.t2 = temp;
 
-				/* Measure and store distance */
-				data.c = measureVL53L1X();
+//				data.t2 = SHT30_readTemp(); // TODO: SHT30 (0x88) seems to respond to VL53L1X (0x52) commands and break the I2C bus until power cycle
 
-				// TODO: measure more things!
+				/* Measure and store distance */
+				uint16_t distance = measureVL53L1X();
 
 #if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
-				dbinfoInt("t1: ", data.t1, "");
-				dbinfoInt("t2: ", data.t2, "");
-				dbinfoInt("c: ", data.c, " mm");
+				dbinfoInt("distance = ", distance, " mm");
+#endif /* DEBUG_DBPRINT */
+
+				data.c = (uint16_t)(((float)(MAX_LENGTH_MM - measureVL53L1X()) / MAX_LENGTH_MM) * 100.0);
+
+				// TODO: measure more things!
+				data.n1 = 20;
+				data.n2 = 20;
+				data.p = 20;
+				data.r = 20;
+
+#if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
+				dbprintln("");
+				dbinfoInt(">> t1: ", data.t1, "");
+				dbinfoInt(">> t2: ", data.t2, "");
+				dbinfoInt(">> c: ", data.c, " %");
+				dbprintln("");
 #endif /* DEBUG_DBPRINT */
 
 				MCUstate = SEND_DATA;
@@ -278,7 +324,7 @@ int main (void)
 			case SLEEP:
 			{
 				clearLCD();
-				writeStringLCD("Sleeping ...");
+				writeStringLCD("Waiting...");
 				displayMeas(); /* Display measurements on following rows */
 
 
@@ -322,7 +368,6 @@ int main (void)
 #if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
 					dbprintln("    ");
 					dbprintln_color("PULSE INT", 4);
-					dbwarn("Sending pulses ...");
 #endif /* DEBUG_DBPRINT */
 
 					clearLCD();
@@ -332,6 +377,10 @@ int main (void)
 					if (PULSE_getTriggered(0))
 					{
 
+#if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
+					dbwarn("Sending P1 pulses ...");
+#endif /* DEBUG_DBPRINT */
+
 #if SENDING_DATA == 1 /* SENDING_DATA */
 						sendPulse (0, 1);
 #endif /* SENDING_DATA */
@@ -340,6 +389,10 @@ int main (void)
 					}
 					else if (PULSE_getTriggered(1))
 					{
+
+#if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
+					dbwarn("Sending P2 pulses ...");
+#endif /* DEBUG_DBPRINT */
 
 #if SENDING_DATA == 1 /* SENDING_DATA */
 						sendPulse (1, 1);
@@ -351,7 +404,7 @@ int main (void)
 					MCUstate = WAKEUP;
 
 					clearLCD();
-					writeStringLCD("Sleeping...");
+					writeStringLCD("Waiting...");
 					displayMeas(); /* Display measurements on following rows */
 
 					remainingSleeptime += RTC_getPassedSleeptime(); /* Add the time spend sleeping to the variable */

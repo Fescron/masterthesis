@@ -1,16 +1,17 @@
 /***************************************************************************//**
  * @file DS18B20.c
  * @brief All code for the DS18B20 temperature sensor.
- * @version 1.0
+ * @version 1.1
  * @author
  *   Alec Vanderhaegen & Sarah Goossens@n
- *   Modified by Brecht Van Eeckhoudt
+ *   Heavily modified by Brecht Van Eeckhoudt
  *
  * ******************************************************************************
  *
  * @section Versions
  *
- *   @li v1.0: Initial version
+ *   @li v1.0: Initial version.
+ *   @li v1.1: Fixed timing for reading/writing bytes.
  *
  * ******************************************************************************
  *
@@ -56,10 +57,10 @@
 
 /* Local definitions */
 /** Enable (1) or disable (0) printing the timeout counter value using DBPRINT */
-#define DBPRINT_TIMEOUT 1
+#define DBPRINT_TIMEOUT 0
 
 /* Maximum values for the counters before exiting a `while` loop */
-#define TIMEOUT_INIT       200 // Before: 20
+#define TIMEOUT_INIT       100
 #define TIMEOUT_CONVERSION 500 /* 12 bit resolution (reset default) = 750 ms max resolving time */
 
 
@@ -71,8 +72,8 @@ bool TEMP1_VDD_initialized = false;
 /* Local prototypes */
 static void powerDS18B20 (uint8_t number, bool enabled);
 static bool init_DS18B20 (uint8_t number);
-static void writeByteToDS18B20 (uint8_t number, uint8_t data);
-static uint8_t readByteFromDS18B20 (uint8_t number);
+static void writeByteDS18B20 (uint8_t number, uint8_t data);
+static uint8_t readByteDS18B20 (uint8_t number);
 static int32_t convertTempData (uint8_t tempLS, uint8_t tempMS);
 
 
@@ -103,7 +104,7 @@ int32_t readTempDS18B20 (uint8_t number)
 	bool conversionCompleted = false;
 
 	/* Variable to hold raw data bytes */
-	uint8_t rawDataFromDS18B20Arr[9] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+	uint8_t rawDataDS18B20[9] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
 
 	/* Initialize timer
 	 * Initializing and disabling the timer again adds about 40 µs active time but should conserve sleep energy... */
@@ -118,8 +119,8 @@ int32_t readTempDS18B20 (uint8_t number)
 	/* Initialize communication and only continue if successful */
 	if (init_DS18B20(number))
 	{
-		writeByteToDS18B20(number, 0xCC); /* 0xCC = "Skip Rom" (address all devices on the bus simultaneously without sending out any ROM code information) */
-		writeByteToDS18B20(number, 0x44); /* 0x44 = "Convert T" */
+		writeByteDS18B20(number, 0xCC); /* 0xCC = "Skip Rom" (address all devices on the bus simultaneously without sending out any ROM code information) */
+		writeByteDS18B20(number, 0x44); /* 0x44 = "Convert T" */
 
 		/* MASTER now generates "read time slots", the DS18B20 will write HIGH to the bus if the conversion is completed
 		 *   The datasheet gives the following directions for time slots, but reading bytes also seems to work...
@@ -127,7 +128,7 @@ int32_t readTempDS18B20 (uint8_t number)
 		 *     - After the master pulls the line low for 1 µs, the data is valid for up to 15 µs */
 		while ((counter < TIMEOUT_CONVERSION) && !conversionCompleted)
 		{
-			uint8_t testByte = readByteFromDS18B20(number);
+			uint8_t testByte = readByteDS18B20(number);
 			if (testByte > 0) conversionCompleted = true;
 
 			counter++;
@@ -144,7 +145,7 @@ int32_t readTempDS18B20 (uint8_t number)
 			/* Disable interrupts and turn off the clock to the underlying hardware timer. */
 			USTIMER_DeInit();
 
-			/* Disable data pin (otherwise we got a "sleep" current of about 330 µA due to the on-board 10k pull-up) */
+			/* Disable data pin (otherwise we got a "sleep" current of about 330 µA due to the on-board (10k) pull-up) */
 			if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModeDisabled, 0);
 			else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModeDisabled, 0);
 
@@ -168,17 +169,17 @@ int32_t readTempDS18B20 (uint8_t number)
 		}
 #endif /* DBPRINT_TIMEOUT */
 
-		init_DS18B20(number);             /* Initialize communication */
-		writeByteToDS18B20(number, 0xCC); /* 0xCC = "Skip Rom" */
-		writeByteToDS18B20(number, 0xBE); /* 0xCC = "Read Scratchpad" */
+		init_DS18B20(number);           /* Initialize communication */
+		writeByteDS18B20(number, 0xCC); /* 0xCC = "Skip Rom" */
+		writeByteDS18B20(number, 0xBE); /* 0xBE = "Read Scratchpad" */
 
 		/* Read the bytes */
-		for (uint8_t i = 0; i < 9; i++) rawDataFromDS18B20Arr[i] = readByteFromDS18B20(number);
+		for (uint8_t i = 0; i < 9; i++) rawDataDS18B20[i] = readByteDS18B20(number);
 
 		/* Disable interrupts and turn off the clock to the underlying hardware timer. */
 		USTIMER_DeInit();
 
-		/* Disable data pin (otherwise we got a "sleep" current of about 330 µA due to the on-board 10k pull-up) */
+		/* Disable data pin (otherwise we got a "sleep" current of about 330 µA due to the on-board (10k) pull-up) */
 		if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModeDisabled, 0);
 		else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModeDisabled, 0);
 
@@ -186,14 +187,18 @@ int32_t readTempDS18B20 (uint8_t number)
 		powerDS18B20(number, false);
 
 		/* Return the converted byte */
-		return (convertTempData(rawDataFromDS18B20Arr[0], rawDataFromDS18B20Arr[1]));
+		return (convertTempData(rawDataDS18B20[0], rawDataDS18B20[1]));
 	}
 	else
 	{
 		/* Disable interrupts and turn off the clock to the underlying hardware timer. */
 		USTIMER_DeInit();
 
-		/* Disable data pin (otherwise we got a "sleep" current of about 330 µA due to the on-board 10k pull-up) */
+#if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
+		dbcrit("DS18B20 INIT failed!");
+#endif /* DEBUG_DBPRINT */
+
+		/* Disable data pin (otherwise we got a "sleep" current of about 330 µA due to the on-board (10k) pull-up) */
 		if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModeDisabled, 0);
 		else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModeDisabled, 0);
 
@@ -346,39 +351,41 @@ static bool init_DS18B20 (uint8_t number)
  * @param[in] data
  *   The data to write to the DS18B20.
  *****************************************************************************/
-static void writeByteToDS18B20 (uint8_t number, uint8_t data)
+static void writeByteDS18B20 (uint8_t number, uint8_t data)
 {
-	/* In the case of gpioModePushPull", the last argument directly sets the pin state */
-	if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModePushPull, 0);
-	else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModePushPull, 0);
-
 	/* Write the byte, bit by bit */
 	for (uint8_t i = 0; i < 8; i++)
 	{
 		/* Check if we need to write a "1" */
 		if (data & 0x01)
 		{
-			if (number == 0) GPIO_PinOutClear(TEMP0_DATA_PORT, TEMP0_DATA_PIN);
-			else if (number == 1) GPIO_PinOutClear(TEMP1_DATA_PORT, TEMP1_DATA_PIN);
+			/* Pull line low */
+			/* In the case of gpioModePushPull", the last argument directly sets the pin state */
+			if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModePushPull, 0);
+			else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModePushPull, 0);
 
 			/* 5 µs delay should be called here but this loop works fine too... */
 			for (uint8_t i=0; i<5; i++);
 
-			if (number == 0) GPIO_PinOutSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN);
-			else if (number == 1) GPIO_PinOutSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN);
+			/* Let line rise because of the pull-up resistor */
+			if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModeInput, 0);
+			else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModeInput, 0);
 
 			USTIMER_DelayIntSafe(60);
 		}
 		/* If not, write a "0" */
 		else
 		{
-			if (number == 0) GPIO_PinOutClear(TEMP0_DATA_PORT, TEMP0_DATA_PIN);
-			else if (number == 1) GPIO_PinOutClear(TEMP1_DATA_PORT, TEMP1_DATA_PIN);
+			/* Pull line low */
+			/* In the case of gpioModePushPull", the last argument directly sets the pin state */
+			if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModePushPull, 0);
+			else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModePushPull, 0);
 
 			USTIMER_DelayIntSafe(60);
 
-			if (number == 0) GPIO_PinOutSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN);
-			else if (number == 1) GPIO_PinOutSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN);
+			/* Let line rise because of the pull-up resistor */
+			if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModeInput, 0);
+			else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModeInput, 0);
 
 			/* 5 µs delay should be called here but this loop works fine too... */
 			for (uint8_t i=0; i<5; i++);
@@ -386,10 +393,6 @@ static void writeByteToDS18B20 (uint8_t number, uint8_t data)
 		/* Right shift bits once */
 		data >>= 1;
 	}
-
-	/* Set data line high */
-	if (number == 0) GPIO_PinOutSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN);
-	else if (number == 1) GPIO_PinOutSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN);
 }
 
 
@@ -408,7 +411,7 @@ static void writeByteToDS18B20 (uint8_t number, uint8_t data)
  * @return
  *   The byte read from the DS18B20.
  *****************************************************************************/
-static uint8_t readByteFromDS18B20 (uint8_t number)
+static uint8_t readByteDS18B20 (uint8_t number)
 {
 	/* Data to eventually return */
 	uint8_t data = 0x0;
@@ -416,7 +419,15 @@ static uint8_t readByteFromDS18B20 (uint8_t number)
 	/* Read the byte, bit by bit */
 	for (uint8_t i = 0; i < 8; i++)
 	{
-		/* Change pin-mode to input */
+		/* Pull line low */
+		/* In the case of gpioModePushPull", the last argument directly sets the pin state */
+		if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModePushPull, 0);
+		else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModePushPull, 0);
+
+		/* 5 µs delay should be called here but this loop works fine too... */
+		for (uint8_t i=0; i<5; i++);
+
+		/* Let line rise because of the pull-up resistor */
 		if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModeInput, 0);
 		else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModeInput, 0);
 
@@ -427,10 +438,6 @@ static uint8_t readByteFromDS18B20 (uint8_t number)
 		 * 0x80 = 1000 0000 */
 		if ((number == 0) && (GPIO_PinInGet(TEMP0_DATA_PORT, TEMP0_DATA_PIN))) data |= 0x80;
 		else if (number == 1) if (GPIO_PinInGet(TEMP1_DATA_PORT, TEMP1_DATA_PIN)) data |= 0x80;
-
-		/* In the case of gpioModePushPull", the last argument directly sets the pin state */
-		if (number == 0) GPIO_PinModeSet(TEMP0_DATA_PORT, TEMP0_DATA_PIN, gpioModePushPull, 1);
-		else if (number == 1) GPIO_PinModeSet(TEMP1_DATA_PORT, TEMP1_DATA_PIN, gpioModePushPull, 1);
 
 		/* Wait some time before going into next loop */
 		USTIMER_DelayIntSafe(70);
