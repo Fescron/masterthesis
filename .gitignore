@@ -53,3 +53,5 @@ GNU ARM v* - Release/**/*
 
 *.prefs
 .prefs
+
+firmware/EFM32HG222F64_iot-mbbr/GNU ARM v4\.9\.3 - Debug/
