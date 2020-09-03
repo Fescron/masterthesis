@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file adc.h
  * @brief ADC functionality for reading the (battery) voltage and internal temperature.
- * @version 2.1
+ * @version 3.0
  * @author Brecht Van Eeckhoudt
  *
  * ******************************************************************************
@@ -46,7 +46,11 @@
 typedef enum adc_measurements
 {
 	BATTERY_VOLTAGE,
-	INTERNAL_TEMPERATURE
+	INTERNAL_TEMPERATURE,
+	CH1,
+	CH2,
+	CH3,
+	CH4
 } ADC_Measurement_t;
 
 

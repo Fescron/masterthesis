@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file main.c
  * @brief The main file for the IoT-MBBR project.
- * @version 1.0
+ * @version 1.1
  * @author Brecht Van Eeckhoudt
  *
  * ******************************************************************************
@@ -9,6 +9,7 @@
  * @section Versions
  * *
  *   @li v1.0: Initial version.
+ *   @li v1.1: Changed `float` to `float32_t`, added ADC measurement functionality.
  *
  * ******************************************************************************
  *
@@ -181,7 +182,7 @@ void displayMeas (void)
 	writeStringLCD(red_char);
 	writeStringLCD("mA");
 
-	delay(50); // Quick fix
+	delay(50); /* Delay so all of the data is shown on the screen */
 }
 
 
@@ -224,6 +225,9 @@ int main (void)
 
 				/* Init VL53L1X */
 				initVL53L1X();
+
+				/* Init ADC */
+				initADC(CH1);
 
 				/* Initialize BG96 */
 #if SENDING_DATA == 1 /* SENDING_DATA */
@@ -272,10 +276,11 @@ int main (void)
 				dbinfoInt("distance = ", distance, " mm");
 #endif /* DEBUG_DBPRINT */
 
-				data.c = (uint16_t)(((float)(MAX_LENGTH_MM - measureVL53L1X()) / MAX_LENGTH_MM) * 100.0);
+				data.c = (uint16_t)(((float32_t)(MAX_LENGTH_MM - measureVL53L1X()) / MAX_LENGTH_MM) * 100.0);
+
+				data.n1 = readADC(CH1);
 
 				// TODO: measure more things!
-				data.n1 = 20;
 				data.n2 = 20;
 				data.p = 20;
 				data.r = 20;
@@ -285,6 +290,10 @@ int main (void)
 				dbinfoInt(">> t1: ", data.t1, "");
 				dbinfoInt(">> t2: ", data.t2, "");
 				dbinfoInt(">> c: ", data.c, " %");
+				dbinfoInt(">> n1: ", data.n1, " mA");
+				dbinfoInt(">> n2: ", data.n2, " mA");
+				dbinfoInt(">> p: ", data.p, " mA");
+				dbinfoInt(">> r: ", data.r, " mA");
 				dbprintln("");
 #endif /* DEBUG_DBPRINT */
 

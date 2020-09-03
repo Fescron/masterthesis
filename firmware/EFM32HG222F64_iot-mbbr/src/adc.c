@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file adc.c
- * @brief ADC functionality for reading the (battery) voltage and internal temperature.
- * @version 2.1
+ * @brief ADC functionality for reading the (battery) voltage, internal temperature and CH4/5/6/7 voltages.
+ * @version 3.0
  * @author Brecht Van Eeckhoudt
  *
  * ******************************************************************************
@@ -17,6 +17,7 @@
  *   @li v2.0: Disabled peripheral clock before entering an `error` function, added
  *             functionality to exit methods after `error` call and updated version number.
  *   @li v2.1: Removed `static` before the local variables (not necessary).
+ *   @li v3.0: Added CH4/5/6/7 measurement capabilities.
  *
  * ******************************************************************************
  *
@@ -63,7 +64,7 @@
 #define DBPRINT_TIMEOUT 0
 
 /** Maximum value for the counter before exiting a `while` loop */
-#define TIMEOUT_CONVERSION 50
+#define TIMEOUT_CONVERSION 70 // Before: 50
 
 
 /* Local variables */
@@ -108,6 +109,26 @@ void initADC (ADC_Measurement_t peripheral)
 	 * This is probably not necessary since a prescale value other than 0 (default) has been defined. */
 	if (peripheral == INTERNAL_TEMPERATURE) initSingle.input = adcSingleInpTemp; /* Internal temperature */
 	else if (peripheral == BATTERY_VOLTAGE) initSingle.input = adcSingleInpVDDDiv3; /* Internal VDD/3 */
+	else if (peripheral == CH1)
+	{
+		initSingle.input = adcSingleInputCh4; /* Channel 4 */
+		initSingle.reference = adcRef2V5; /* Internal 2V5 reference (1V25 default) */
+	}
+	else if (peripheral == CH2)
+	{
+		initSingle.input = adcSingleInputCh5; /* Channel 5 */
+		initSingle.reference = adcRef2V5; /* Internal 2V5 reference (1V25 default) */
+	}
+	else if (peripheral == CH3)
+	{
+		initSingle.input = adcSingleInputCh6; /* Channel 6 */
+		initSingle.reference = adcRef2V5; /* Internal 2V5 reference (1V25 default) */
+	}
+	else if (peripheral == CH4)
+	{
+		initSingle.input = adcSingleInputCh7; /* Channel 7 */
+		initSingle.reference = adcRef2V5; /* Internal 2V5 reference (1V25 default) */
+	}
 	else
 	{
 
@@ -142,6 +163,10 @@ void initADC (ADC_Measurement_t peripheral)
 #if DEBUG_DBPRINT == 1 /* DEBUG_DBPRINT */
 	if (peripheral == INTERNAL_TEMPERATURE) dbinfo("ADC0 initialized for internal temperature");
 	else if (peripheral == BATTERY_VOLTAGE) dbinfo("ADC0 initialized for VBAT");
+	else if (peripheral == CH1) dbinfo("ADC0 initialized for CH1");
+	else if (peripheral == CH2) dbinfo("ADC0 initialized for CH2");
+	else if (peripheral == CH3) dbinfo("ADC0 initialized for CH3");
+	else if (peripheral == CH4) dbinfo("ADC0 initialized for CH4");
 #endif /* DEBUG_DBPRINT */
 
 }
@@ -175,6 +200,7 @@ int32_t readADC (ADC_Measurement_t peripheral)
 		if (initSingle.input != adcSingleInpTemp)
 		{
 			initSingle.input = adcSingleInpTemp; /* Internal temperature */
+			initSingle.reference = adcRef1V25; /* Internal 1V25 reference (default) */
 			ADC_InitSingle(ADC0, &initSingle);
 		}
 	}
@@ -183,6 +209,43 @@ int32_t readADC (ADC_Measurement_t peripheral)
 		if (initSingle.input != adcSingleInpVDDDiv3)
 		{
 			initSingle.input = adcSingleInpVDDDiv3; /* Internal VDD/3 */
+			initSingle.reference = adcRef1V25; /* Internal 1V25 reference (default) */
+			ADC_InitSingle(ADC0, &initSingle);
+		}
+	}
+	else if (peripheral == CH1)
+	{
+		if (initSingle.input != adcSingleInputCh4)
+		{
+			initSingle.input = adcSingleInputCh4; /* Channel 4 */
+			initSingle.reference = adcRef2V5; /* Internal 2V5 reference (1V25 default) */
+			ADC_InitSingle(ADC0, &initSingle);
+		}
+	}
+	else if (peripheral == CH2)
+	{
+		if (initSingle.input != adcSingleInputCh5)
+		{
+			initSingle.input = adcSingleInputCh5; /* Channel 5 */
+			initSingle.reference = adcRef2V5; /* Internal 2V5 reference (1V25 default) */
+			ADC_InitSingle(ADC0, &initSingle);
+		}
+	}
+	else if (peripheral == CH3)
+	{
+		if (initSingle.input != adcSingleInputCh6)
+		{
+			initSingle.input = adcSingleInputCh6; /* Channel 6 */
+			initSingle.reference = adcRef2V5; /* Internal 2V5 reference (1V25 default) */
+			ADC_InitSingle(ADC0, &initSingle);
+		}
+	}
+	else if (peripheral == CH4)
+	{
+		if (initSingle.input != adcSingleInputCh7)
+		{
+			initSingle.input = adcSingleInputCh7; /* Channel 7 */
+			initSingle.reference = adcRef2V5; /* Internal 2V5 reference (1V25 default) */
 			ADC_InitSingle(ADC0, &initSingle);
 		}
 	}
@@ -241,6 +304,8 @@ int32_t readADC (ADC_Measurement_t peripheral)
 	/* Get the ADC value */
 	value = ADC_DataSingleGet(ADC0);
 
+	dbwarnInt("ADC value = ", value, ""); // Debugging
+
 	/* Disable used clock */
 	CMU_ClockEnable(cmuClock_ADC0, false);
 
@@ -252,7 +317,16 @@ int32_t readADC (ADC_Measurement_t peripheral)
 	}
 	else if (peripheral == BATTERY_VOLTAGE)
 	{
-		float32_t fv = value * 3.75 / 4.096;
+		/* 12 bit: 2^12 = 4096 */
+		float32_t fv = (value * 3.75) / 4.096;
+		value = (int32_t) fv;
+	}
+	else if (peripheral == CH1 || peripheral == CH2 || peripheral == CH3 || peripheral == CH4)
+	{
+		/* 2.5 = reference voltage
+		 * 12 bit: 2^12 = 4096 (comma placement is for int32_t conversion...) */
+		dbprintln("Here!");
+		float32_t fv = (value * 2.5) / 409.6;
 		value = (int32_t) fv;
 	}
 
