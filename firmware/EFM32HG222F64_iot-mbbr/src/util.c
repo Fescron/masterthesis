@@ -1,14 +1,31 @@
 /***************************************************************************//**
  * @file util.c
  * @brief Utility functionality.
- * @version 1.0
+ * @version 4.0
  * @author Brecht Van Eeckhoudt
  *
  * ******************************************************************************
  *
  * @section Versions
  *
- *   @li v1.0: Initial version.
+ *   @li v1.0: Started with the code from https://github.com/Fescron/Project-LabEmbeddedDesign1/tree/master/code/SLSTK3400A_ADXL362
+ *   @li v1.1: Changed PinModeSet DOUT value to 0 in initLED.
+ *   @li v1.2: Removed unnecessary `GPIO_PinOutClear` line in initLED.
+ *   @li v1.3: Moved initRTCcomp method from `main.c` to here, added delay functionality which goes into EM1 or EM2.
+ *   @li v1.4: Moved delay functionality to specific header and source files.
+ *   @li v2.0: Changed `Error()` to `error()`, added a global variable to keep the error number and initialize the pin of the LED automatically.
+ *   @li v2.1: Changed initLED to be a static (~hidden) method and also made the global variables static.
+ *   @li v2.2: Added peripheral clock enable/disable functionality for energy saving purposes, only added necessary includes in header file,
+ *             moved the others to the source file, updated documentation, replaced SysTick delay with RTCC delay, changed error delay length.
+ *   @li v2.3: Changed name of static variable, simplified some logic.
+ *   @li v2.4: Stopped disabling the GPIO clock.
+ *   @li v2.5: Moved documentation.
+ *   @li v2.6: Updated code with new DEFINE checks.
+ *   @li v2.7: Added functionality to send error values using LoRaWAN.
+ *   @li v2.8: Added the ability to enable/disable error forwarding to the cloud using a public definition and changed UART error color.
+ *   @li v3.0: Updated version number.
+ *   @li v3.1: Removed `static` before the local variables (not necessary).
+ *   @li v4.0: Changed functionality for new board type.
  *
  * ******************************************************************************
  *

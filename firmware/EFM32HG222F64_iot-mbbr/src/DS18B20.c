@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file DS18B20.c
  * @brief All code for the DS18B20 temperature sensor.
- * @version 1.1
+ * @version 4.0
  * @author
  *   Alec Vanderhaegen & Sarah Goossens@n
  *   Heavily modified by Brecht Van Eeckhoudt
@@ -10,8 +10,29 @@
  *
  * @section Versions
  *
- *   @li v1.0: Initial version.
- *   @li v1.1: Fixed timing for reading/writing bytes.
+ *   @li v1.0: Reformatted existing methods to use pin_mapping.h, changed unsigned char to
+ *             uint8_t values, added comments and cleaned up includes.
+ *   @li v1.1: Added documentation, removed unnecessary GPIO statements regarding
+ *             DOUT values of VDD pin.
+ *   @li v1.2: Removed some unnecessary GPIO lines and added comments about `out` (DOUT) argument.
+ *   @li v1.3: Changed some methods to be static (~hidden).
+ *   @li v1.4: Cleaned up includes.
+ *   @li v1.5: Made more methods static.
+ *   @li v1.6: Updated documentation.
+ *   @li v1.7: Started using new delay functionality.
+ *   @li v1.8: Added line to disable DATA pin after a measurement, this breaks the code but fixes the sleep current.
+ *   @li v1.9: Enabled and disabled timer each time a measurement is taken.
+ *   @li v2.0: Updated documentation.
+ *   @li v2.1: Changed method to return `uint32_t` instead of float.
+ *   @li v2.2: Changed error numbering, moved definition from header to source file and updated header file include.
+ *   @li v2.3: Changed *timeout* variable and changed types to `int32_t`.
+ *   @li v2.4: Fixed temperature measurement and refined timeout functionality.
+ *   @li v2.5: Updated documentation.
+ *   @li v2.6: Updated code to don't execute code further if the first initialization failed.
+ *   @li v3.0: Disabled initialized functionality before entering an `error` function, added
+ *             functionality to exit methods after `error` call and updated version number.
+ *   @li v3.1: Removed `static` before the local variable (not necessary).
+ *   @li v4.0: Fixed timing for reading/writing bytes.
  *
  * ******************************************************************************
  *

@@ -1,14 +1,37 @@
 /***************************************************************************//**
  * @file interrupt.c
  * @brief Interrupt functionality.
- * @version 1.0
+ * @version 4.0
  * @author Brecht Van Eeckhoudt
  *
  * ******************************************************************************
  *
  * @section Versions
  *
- *   @li v1.0: Initial version.
+ *   @li v1.0: Started from https://github.com/Fescron/Project-LabEmbeddedDesign1
+ *   @li v1.1: Added dbprintln(""); above dbinfo statements in IRQ handlers to fix
+ *             overwriting of text.
+ *   @li v1.2: Disabled the RTC counter if GPIO handlers are called, only added necessary includes
+ *             in header file, moved the others to the source file, updated documentation.
+ *   @li v1.3: Started using set method for the static variable `ADXL_triggered`, added GPIO
+ *             wakeup initialization method here, renamed file.
+ *   @li v1.4: Stopped disabling the GPIO clock.
+ *   @li v1.5: Started using getters/setters to indicate an interrupt to `main.c`.
+ *   @li v1.6: Moved IRQ handler of RTC to this `delay.c`.
+ *   @li v1.7: Updated clear pending interrupt logic.
+ *   @li v1.8: Updated code with new DEFINE checks.
+ *   @li v1.9: Removed error calls for "unknown" pins and added flag check for custom Happy Gecko board pinout.
+ *   @li v2.0: Stopped disabling the RTC counter on pin interrupts.
+ *   @li v2.1: Disabled the RTC counter on a button push because it confused delays called in LoRaWAN code.
+ *   @li v2.2: Changed error numbering.
+ *   @li v3.0: Updated version number.
+ *   @li v3.1: Removed `static` before the local variables (not necessary).
+ *   @li v4.0: Changed functionality for new board type.
+ *
+ * ******************************************************************************
+ *
+ * @note
+ *   Other interrupt handlers can be found in `delay.c` and `adc.c`.
  *
  * ******************************************************************************
  *
