@@ -28,8 +28,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "BG96__at__driver_8c.html",
-"dbprint_8c.html#a0511ddad2e00a8187d5449b15de7eb4f",
-"pin__mapping_8h.html#a889679b237dae4a2cb22ef93f60af720"
+"datatypes_8h.html#a68d90e0eaaa236e9664bbfc691bbd4d4ae88af817feffec91cec7143bd5a4cad5",
+"pin__mapping_8h.html#a6d68c581d3bc6b5b42af0365209f4960"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

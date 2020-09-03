@@ -1,5 +1,9 @@
 var NAVTREEINDEX2 =
 {
+"pin__mapping_8h.html#a6d68c581d3bc6b5b42af0365209f4960":[3,0,0,0,1,8,24],
+"pin__mapping_8h.html#a70da7f30e2387949b740d7e95e93b3e4":[3,0,0,0,1,8,16],
+"pin__mapping_8h.html#a83536eb163a1c8717aa1fb54ce770a6a":[3,0,0,0,1,8,43],
+"pin__mapping_8h.html#a85491dc2790495ac3b3b12bbe1df0531":[3,0,0,0,1,8,56],
 "pin__mapping_8h.html#a889679b237dae4a2cb22ef93f60af720":[3,0,0,0,1,8,53],
 "pin__mapping_8h.html#a90641f6f64fa2ef77150bc6080c2844c":[3,0,0,0,1,8,14],
 "pin__mapping_8h.html#a99d0e2135d34d7a164a249f2db34907b":[3,0,0,0,1,8,35],
