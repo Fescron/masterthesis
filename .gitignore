@@ -1,37 +1,31 @@
-# Windows image file caches
+# Windows - Image file caches
 Thumbs.db
 ehthumbs.db
 
-# Folder config file
+# Windows - Folder config file
 Desktop.ini
 
-# Recycle Bin used on file shares
+# Windows - Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-# Windows Installer files
+# Windows - Installer files
 *.cab
 *.msi
 *.msm
 *.msp
 
-# Windows shortcuts
+# Windows - Shortcuts
 *.lnk
 
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
+# OSX - General files
 .DS_Store
 .AppleDouble
 .LSOverride
 
-# Thumbnails
+# OSX - Thumbnails
 ._*
 
-# Files that might appear in the root of a volume
+# OSX - Files that might appear in the root of a volume
 .DocumentRevisions-V100
 .fseventsd
 .Spotlight-V100
@@ -39,21 +33,18 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 
-# Directories potentially created on remote AFP share
+# OSX - Directories potentially created on remote AFP share
 .AppleDB
 .AppleDesktop
 Network Trash Folder
 Temporary Items
 .apdisk
 
-GNU ARM v* - Debug/*
-GNU ARM v* - Debug/**/*
-GNU ARM v* - Release/*
-GNU ARM v* - Release/**/*
+# ARM code development - Debug/Release files
+firmware/**/Debug
+firmware/**/GNU ARM v* - Debug
+firmware/**/Release
+firmware/**/GNU ARM v* - Release
 
-*.prefs
-.prefs
-
-firmware/EFM32HG222F64_iot-mbbr/GNU ARM v4\.9\.3 - Debug/
-
-EFM32HG222F64_iot-mbbr/GNU ARM v4\.9\.3 - Debug/
+# ARM code development - Settings
+firmware/**/.settings
