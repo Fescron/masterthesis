@@ -45,7 +45,7 @@ The goal of the thesis was to create a module to connect a *Moving Bed BioReacto
 
 The picture below on the left gives an overview of the system that has already been build on the location. The drainage well from the diagram above is pictured on the lower right of this picture. The MBBR itself and a smaller drainage well are underground, under the two manhole covers on the left. In the middle of the picture the measuring system is visible, with under it two blue barrels of carbon source. The picture below on the right gives a peek inside the MBBR. The plastic *carries* are clearly visible.
 
-<img src="documentation/img/opstelling2.jpg" height=320 alt="MBBR situation"> <img src="documentation/img/opstelling3.jpg" height=320 alt="MBBR">
+<img src="documentation/img/opstelling2.jpg" height=300 alt="MBBR situation"> <img src="documentation/img/opstelling3.jpg" height=300 alt="MBBR">
 
 <br/>
 
@@ -75,7 +75,7 @@ Below one can see the block diagram of the constructed PCB (inside the big grey 
 
 To get a better idea of the code functionality a few flowcharts were designed, which can be seen below. The left most diagram indicates the *main code-flow*. The code-flow inside the yellow frames on this main flowchart are elaborated in the two diagrams next to the main diagram. The middle flowchart indicates how different statuses are send to the cloud, and the right one indicates how data is being send to the cloud.
 
-<img src="documentation/img/flowchart-thesis-main-250percent.png" height=380 alt="Main flow chart"> <img src="documentation/img/flowchart-thesis-status-250percent.png" height=380 alt="Status flow chart"> <img src="documentation/img/flowchart-thesis-data-250percent.png" height=380 alt="Sending data flow chart">
+<img src="documentation/img/flowchart-thesis-main-250percent.png" height=360 alt="Main flow chart"> <img src="documentation/img/flowchart-thesis-status-250percent.png" height=360 alt="Status flow chart"> <img src="documentation/img/flowchart-thesis-data-250percent.png" height=360 alt="Sending data flow chart">
 
 <br>
 
